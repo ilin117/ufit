@@ -16,7 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.http import HttpResponse
+from .views import privacyPage
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('privacy/', privacyPage, name='privacy'),
 ]
