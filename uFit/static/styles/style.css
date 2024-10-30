@@ -1,11 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Bungee+Tint&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
-.uFit_nav {
+.uFit-nav {
     display: flex;
     font-size: 50px;
 }
 
-span#uFit_logo {
+span#uFit-logo {
+    letter-spacing: 2px;
     margin-left: auto;
     color: rgba(32, 201, 151, 1);
     font-family: "Inter", sans-serif;
@@ -18,4 +19,72 @@ span#uFit_logo {
 
 a#profile {
     margin-left: auto;
+}
+
+button {
+    all: unset;
+}
+
+button:focus {
+    outline: revert;
+}
+
+/*  sidebar styling */
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 1);
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.5s;
+}
+
+.sidebar span {
+    padding: 8px 8px 8px 32px;
+    letter-spacing: 8%;
+    font-weight: 600;
+    font-family: "Inter", sans-serif;
+    color: rgba(171, 181, 190, 1);
+    font-size: 16px;
+}
+
+.sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: rgba(52, 58, 64, 1);
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(32, 201, 151, 1);
+}
+
+.closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: rgba(32, 201, 151, 1);
+}
+
+.openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    color: white;
+    padding: 10px 15px;
+    border: none;
 }

@@ -11,12 +11,21 @@
     <title>Document</title>
 </head>
 
-<div class="uFit_nav">
-    <span id="options"><i class="bi bi-justify"></i></span>
-    <span id="uFit_logo">uFit</span>
+<div id="mySidebar" class="sidebar">
+    <button href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</button>
+    <span>TOPICS</span>
+    <a href="">Fitness</a>
+    <a href="">Topics</a>
+    <a href="">Added</a>
+</div>
+
+<div class="uFit-nav">
+    <button id="openbtn" onclick="openNav()"><i class="bi bi-justify"></i></button>
+    <span id="uFit-logo">uFit</span>
     <a id="profile" href=""><i class="bi bi-person-circle"></i></a>
 </div>
 
 <hr>
+<script src="{% static 'js/script.js' %}"></script>
 
 </html>

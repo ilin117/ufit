@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class ChatpageConfig(AppConfig):
+class WelcomePageConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'chatpage'
+    name = 'welcome_page'
