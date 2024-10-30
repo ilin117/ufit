@@ -1,4 +1,4 @@
-uFit/uFit/__pycache__
+**/__pycache__
 .DS_Store
-venv/
-.vscode
+**/venv/
+**/.vscode
