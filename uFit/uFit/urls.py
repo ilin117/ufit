@@ -21,4 +21,5 @@ from django.urls import path, include
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("welcome_page.urls")),
+    path("privacy/", privacyPage, name="privacy"),
 ]
