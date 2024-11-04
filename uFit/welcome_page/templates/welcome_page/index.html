@@ -1,25 +1,24 @@
 <!DOCTYPE html>
 {% extends 'navbar.html' %}
-
+{% load static %}
 {% block content %}
 
-<main>
 
-    <div class="frame">
-        <div class="uFit-info">
-            <h1>Bringing communities together</h1>
 
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Faucibus in libero risus semper habitant arcu
-                eget.
-                Et integer facilisi eget.</p>
+<div class="frame">
+    <div class="uFit-info">
+        <h1>Bringing communities together</h1>
 
-            <button class="login-btn">Get started</button>
-        </div>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Faucibus in libero risus semper habitant arcu
+            eget.
+            Et integer facilisi eget.</p>
 
-        <!-- <div class="img-container"><img
-                src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg" alt="">
-        </div> -->
+        <button class="login-btn">Get started</button>
     </div>
-</main>
+
+    <div class="img-container"><img class="responsive-image" src="{% static 'images/cat.jpg' %}" />
+    </div>
+</div>
+
 
 {% endblock content %}

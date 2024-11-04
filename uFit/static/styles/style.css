@@ -7,12 +7,12 @@ body {
 }
 
 .uFit-nav {
-    background-color: white;
+    background-color: rgba(255, 255, 255, 1);
     position: sticky;
     font-size: 35px;
     display: flex;
     top: 0;
-    border-bottom: 1px solid grey;
+    border-bottom: 1px solid rgba(180, 171, 171, 0.66);
 }
 
 #uFit-logo {
@@ -23,7 +23,7 @@ body {
     font-weight: bold;
     font-style: italic;
     -webkit-text-stroke-width: 2px;
-    -webkit-text-stroke-color: black;
+    -webkit-text-stroke-color: rgba(0, 0, 0, 1);
     paint-order: stroke fill;
 }
 
@@ -168,4 +168,7 @@ button:focus {
 
 .login-btn:hover {
     background-color: black;
+}
+
+.img-container {
 }
