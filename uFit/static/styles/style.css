@@ -1,10 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Bungee+Tint&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
 /* the nav bar */
+
+body {
+    font-family: "Inter", sans-serif;
+}
+
 .uFit-nav {
+    background-color: white;
+    position: sticky;
     font-size: 35px;
     display: flex;
-    font-family: "Inter", sans-serif;
+    top: 0;
+    border-bottom: 1px solid grey;
 }
 
 #uFit-logo {
@@ -31,7 +39,6 @@ button:focus {
 /*  sidebar-options styling */
 .sidebar-options {
     font-weight: 600;
-    font-family: "Inter", sans-serif;
     font-size: 14px;
     text-decoration: none;
     height: 100%;
@@ -50,7 +57,6 @@ button:focus {
     padding: 8px 8px 20px 32px;
     letter-spacing: 1.5px;
     font-weight: 600;
-    font-family: "Inter", sans-serif;
     color: rgba(171, 181, 190, 1);
     font-size: 16px;
 }
@@ -120,7 +126,6 @@ button:focus {
 .options-links {
     padding: 8px 8px 8px 40px;
     text-decoration: none;
-    font-family: "Inter", sans-serif;
     font-weight: 600;
     font-size: 14px;
     color: rgba(52, 58, 64, 1);
@@ -131,4 +136,36 @@ button:focus {
 .options-links:hover {
     color: rgba(255, 255, 255, 1);
     background-color: rgba(32, 201, 151, 1);
+}
+
+/* welcome page */
+.frame {
+    display: flex;
+}
+
+.uFit-info {
+    padding-top: 40px;
+    padding-left: 50px;
+    padding-right: 400px;
+}
+
+.uFit-info p {
+    line-height: 34px;
+    font-size: 20px;
+}
+
+.login-btn {
+    border-radius: 40px;
+    background-color: rgba(32, 201, 151, 1);
+    font-weight: 500;
+    color: rgba(255, 255, 255, 1);
+    width: 150px;
+    height: 45px;
+    text-align: center;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.login-btn:hover {
+    background-color: black;
 }
