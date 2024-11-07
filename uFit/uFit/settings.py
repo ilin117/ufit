@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "uFit",
-    "welcome_page",
+    "base",
 ]
 
 MIDDLEWARE = [
