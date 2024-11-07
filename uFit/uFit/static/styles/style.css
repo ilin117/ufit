@@ -132,3 +132,37 @@ button:focus {
     color: rgba(255, 255, 255, 1);
     background-color: rgba(32, 201, 151, 1);
 }
+
+
+.uFit-footer {
+    background-color: rgba(32, 201, 151, 1);
+    color: rgba(255, 255, 255, 1);
+    padding: 20px;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.footer-links {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-weight: 600;
+    margin: 0 10px;
+    transition: 0.3s;
+}
+
+.footer-links:hover {
+    color: rgba(255, 255, 255, 1);
+}
+
+.footer-copyright {
+    font-size: 12px;
+    font-weight: 400;
+    margin-top: 10px;
+}
