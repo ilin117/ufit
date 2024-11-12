@@ -23,5 +23,5 @@ from .views import privacyPage
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("base.urls")),
-    path("privacy/", privacyPage, name="privacy"),
+    
 ]
