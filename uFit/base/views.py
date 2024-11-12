@@ -5,8 +5,6 @@ from django.shortcuts import render
 def say_hello(request):
     return render(request, "base/index.html", {})
 
-def home(request):
-    return render(request, 'home.html')
+def privacyPage(request):
+    return render(request, 'base/privacy.html')
 
-def chatpage(request):
-    return render(request, 'chatpage.html')
