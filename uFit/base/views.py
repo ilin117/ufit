@@ -7,3 +7,4 @@ def say_hello(request):
 
 def privacyPage(request):
     return render(request, 'base/privacy.html')
+
