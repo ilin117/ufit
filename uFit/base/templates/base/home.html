@@ -1,3 +1,7 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,14 +14,6 @@
             margin: 0;
             padding: 0;
             background-color: #f4f4f4;
-        }
-        header {
-            background-color: #2bca92;
-            color: white;
-            padding: 15px;
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
         }
         .container {
             display: flex;
@@ -76,9 +72,6 @@
     </style>
 </head>
 <body>
-    <header>
-        Welcome to UFIT
-    </header>
 
     <div class="container">
         <!-- Feed Section -->
@@ -142,3 +135,6 @@
     </div>
 </body>
 </html>
+
+
+{% endblock content %}
