@@ -17,11 +17,8 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-from django.http import HttpResponse
-from .views import privacyPage
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", include("welcome_page.urls")),
-    path("privacy/", privacyPage, name="privacy"),
+    path("", include("base.urls")),
 ]

@@ -144,8 +144,9 @@ button:focus {
 }
 
 .uFit-info {
+    align-items: center;
+    justify-content: center;
     padding-top: 40px;
-    padding-left: 50px;
     padding-right: 400px;
 }
 
@@ -170,5 +171,46 @@ button:focus {
     background-color: black;
 }
 
-.img-container {
+/* .video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+} */
+
+/* footer styling*/
+.uFit-footer {
+    background-color: rgba(32, 201, 151, 1);
+    color: rgba(255, 255, 255, 1);
+    padding: 20px;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.footer-links {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-weight: 600;
+    margin: 0 10px;
+    transition: 0.3s;
+}
+
+.footer-links:hover {
+    color: rgba(255, 255, 255, 1);
+}
+
+.footer-copyright {
+    font-size: 12px;
+    font-weight: 400;
+    margin-top: 10px;
 }
