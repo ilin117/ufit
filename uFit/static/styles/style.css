@@ -96,7 +96,7 @@ button:focus {
 }
 
 .profile-options-wrap.open-options {
-    height: 800px;
+    height: 200px;
 }
 
 .profile-options {
@@ -104,6 +104,9 @@ button:focus {
     background: rgba(235, 229, 252, 1);
     padding: 20px;
     margin: 10px;
+    right: 125px;
+    top: -10px;
+    position: absolute;
 }
 
 .user-info {
@@ -137,49 +140,6 @@ button:focus {
     color: rgba(255, 255, 255, 1);
     background-color: rgba(32, 201, 151, 1);
 }
-
-/* welcome page */
-.frame {
-    display: flex;
-}
-
-.uFit-info {
-    align-items: center;
-    justify-content: center;
-    padding-top: 40px;
-    padding-right: 400px;
-}
-
-.uFit-info p {
-    line-height: 34px;
-    font-size: 20px;
-}
-
-.login-btn {
-    border-radius: 40px;
-    background-color: rgba(32, 201, 151, 1);
-    font-weight: 500;
-    color: rgba(255, 255, 255, 1);
-    width: 150px;
-    height: 45px;
-    text-align: center;
-    transition: 0.5s;
-    cursor: pointer;
-}
-
-.login-btn:hover {
-    background-color: black;
-}
-
-/* .video-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.8;
-} */
 
 /* footer styling*/
 .uFit-footer {
