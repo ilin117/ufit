@@ -8,3 +8,6 @@ def say_hello(request):
 def privacyPage(request):
     return render(request, 'base/privacy.html')
 
+def homePage(request):
+    return render(request, 'base/home.html')
+
