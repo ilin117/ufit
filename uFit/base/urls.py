@@ -12,3 +12,4 @@ urlpatterns = [path("", views.welcomePage, name="hello"),
                path("postpage/", views.postpage, name="postpage"),
                path("profilepage/", views.profilepage, name="profilepage"),
                path("loginpage/", views.login_page, name="loginpage"),]
+
