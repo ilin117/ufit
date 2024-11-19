@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 
 # Create your views here.
-def say_hello(request):
+def welcomePage(request):
     return render(request, "base/index.html", {})
 
 def privacyPage(request):
