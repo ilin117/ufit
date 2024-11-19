@@ -11,4 +11,4 @@ urlpatterns = [path("", views.say_hello, name="hello"),
                path("chatpage/", views.chatpage, name="chatpage"),
                path("postpage/", views.postpage, name="postpage"),
                path("profilepage/", views.profilepage, name="profilepage"),
-               path("loginpage/", views.login_page, name="loginpage"),]
+               path("loginXpage/", views.login_page, name="loginpage"),]
