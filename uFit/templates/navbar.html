@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 {% load static %}
 
 <!DOCTYPE html>
@@ -15,7 +14,7 @@
 <div class="uFit-nav">
     <div class="sidebar">
         <button class="openbtn" onclick="openNav()">
-            <i class="bi bi-justify"></i>
+            <i class="bi bi-justify" onclick="openNav()"></i>
         </button>
         <div id="nav-sidebar" class="sidebar-options">
             <button href="javascript:void(0)" class="closebtn" onclick="closeNav()">
@@ -39,20 +38,16 @@
                         src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg">
                     <h3>@IssacLin</h3>
                 </div>
-                <hr>
                 <a href="" class="options-links">Edit Profile</a>
                 <a href="" class="options-links">Logout</a>
             </div>
         </div>
     </div>
 </div>
-<hr />
 
 {% block content %}
 
 {% endblock %}
-
-
 
 <script src="{% static 'js/navbar.js' %}"></script>
 
