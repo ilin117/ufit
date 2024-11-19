@@ -8,7 +8,6 @@ def welcomePage(request):
 
 def privacyPage(request):
     return render(request, "base/privacy.html")
-    return render(request, "base/privacy.html")
 
 
 def homePage(request):
