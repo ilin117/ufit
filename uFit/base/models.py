@@ -18,3 +18,13 @@ class Post(models.Model):
 class User(models.Model):
     username = models.CharField(max_length=200)
     password = models.CharField(max_length=200)
+
+
+class Author(models.Model):
+    name = models.CharField(max_length=500)
+
+
+class Message(models.Model):
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)

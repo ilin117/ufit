@@ -142,6 +142,10 @@ button:focus {
 
 /* footer styling*/
 .uFit-footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
     background-color: rgba(32, 201, 151, 1);
     color: rgba(255, 255, 255, 1);
     padding: 20px;
@@ -298,4 +302,89 @@ button:focus {
     box-sizing: border-box;
     background: rgba(235, 229, 252, 1);
     color: white;
+}
+
+/* chat page styling */
+.chatpage-body {
+    background-color: rgba(255, 255, 255, 1);
+    margin: 0;
+    padding: 0;
+}
+
+.chatpage-greeting {
+    color: rgb(228, 17, 17);
+    font-size: 14px;
+    text-align: center;
+}
+
+.chatpage-container {
+    max-width: 60%;
+    margin: auto;
+}
+
+.messages {
+    background: rgba(255, 255, 255, 1);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    height: 50vh;
+    overflow-y: scroll;
+}
+
+.message-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.send-button {
+    margin-bottom: 15px;
+    padding: 15px;
+    border: 1px solid;
+    border-radius: 6px;
+    font-size: 16px;
+    background-color: rgba(32, 201, 151, 1);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* .send-button:hover {
+    background-color: rgba(32, 201, 151, 1);
+} */
+
+.message-author {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.message-content {
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+.message-box {
+    background: white;
+    border-left: 4px solid;
+    margin-bottom: 15px;
+    padding: 10px 15px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: #f8f9fa;
+    border: 1px solid lightgray;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 12px 20px;
+    border-radius: 6px;
+    min-height: 100px;
+    font-size: 16px;
+    line-height: 1.5;
+    resize: none;
+    outline: none;
+}
+
+[x-cloak] {
+    display: none !important;
 }

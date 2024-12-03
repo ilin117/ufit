@@ -10,4 +10,8 @@ urlpatterns = [
     path("postpage/", views.postpage, name="postpage"),
     path("profilepage/", views.profilepage, name="profilepage"),
     path("loginpage/", views.login_page, name="loginpage"),
+    path("create-message/", views.create_message, name="create-message"),
+    path(
+        "stream-chat-messages/", views.stream_chat_messages, name="stream-chat-messages"
+    ),
 ]
