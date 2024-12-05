@@ -1,6 +1,7 @@
 from typing import AsyncGenerator
 from django.shortcuts import render, redirect
 from .models import Post
+from .forms import PostForm
 from django.http import HttpRequest, StreamingHttpResponse, HttpResponse
 from . import models
 import asyncio
@@ -13,6 +14,8 @@ from django.contrib.auth.decorators import login_required
 import random
 from datetime import datetime
 
+from django.db.models import Q
+from .models import Post
 
 # Create your views here.
 def lobby(request: HttpRequest) -> HttpResponse:
@@ -128,7 +131,12 @@ def privacyPage(request):
 
 @login_required
 def homePage(request):
-    posts = Post.objects.all()
+    q = request.GET.get('q') if request.GET.get('q') != None else ''
+    posts = Post.objects.filter(
+        Q(title__icontains=q) | 
+        Q(content__icontains=q) | 
+        Q(author__username__icontains=q)
+    )
     context = {"posts": posts}
     return render(request, "base/home.html", context)
 
