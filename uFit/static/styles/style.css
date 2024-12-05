@@ -201,6 +201,7 @@ button:focus {
     font-size: 24px;
     font-weight: bold;
     color: #333;
+    display: inline;
 }
 
 .post {
@@ -239,4 +240,27 @@ button:focus {
     margin: 0;
     font-weight: bold;
     font-size: 16px;
+}
+
+.searchBar {
+    text-align: center;
+    margin-bottom: 20px;
+    margin-left: auto;
+    position: relative;
+    display: inline-block;
+}
+
+
+.searchBar input {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.searchBar svg {
+    position: absolute;
+    top: 30%;
+    right: 5%;
+    width: 15px;
+    height: 15px;
 }
