@@ -57,7 +57,10 @@ ROOT_URLCONF = "uFit.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "templates"],
+        "DIRS": [
+            BASE_DIR / "templates",  # Root level templates folder
+            BASE_DIR / "base" / "templates",  # 'base' app templates folder
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -129,3 +132,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # messaging
 ASGI_APPLICATION = "uFit.asgi.application"
+
+LOGIN_REDIRECT_URL = "base/home"  # Redirect to home page after login
+LOGOUT_REDIRECT_URL = "base/loginpage"  # Redirect to login page after

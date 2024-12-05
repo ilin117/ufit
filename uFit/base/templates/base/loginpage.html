@@ -5,21 +5,91 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>uFit Login Page</title>
-    <link rel="stylesheet" href="{% static 'styles/style.css' %}">
+    <title>UFIT Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        /* Logo Styling */
+        #uFit-logo {
+            font-size: 60px;
+            font-weight: bold;
+            color: rgba(32, 201, 151, 1);
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            font-style: italic;
+            -webkit-text-stroke-width: 2px;
+            -webkit-text-stroke-color: rgba(0, 0, 0, 1);
+            paint-order: stroke fill;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 93%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #2bca92;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .signup {
+            margin-top: 10px;
+        }
+
+        .signup a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .signup a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 
-<body class="login-body">
+<body>
     <div class="login-container">
-        <div id="uFit-logo" width="100px" height="100px">uFit</div>
-        <form>
-            <input class="username" type="text" placeholder="Username" required /><br />
-            <input class="password" type="password" placeholder="Password" required /><br />
-            <button type="submit" class="submit-btn">Login</button>
+        <div id="uFit-logo">UFIT</div>
+        <form method="POST">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Username" required /><br />
+            <input type="password" name="password" placeholder="Password" required /><br />
+            <button type="submit">Login</button>
         </form>
         <div class="signup">
             <p>
-                Don't have an account? <a href="registration_page.html">Sign up</a>
+                Don't have an account? <a href="{% url 'registrationpage' %}">Sign up</a>
             </p>
         </div>
     </div>
