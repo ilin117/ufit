@@ -9,13 +9,13 @@ import json
 # Create your views here.
 def chatpage(request: HttpRequest) -> HttpResponse:
     if not request.session.get("username"):
-        return redirect("lobby")
+        return redirect("home")
     return render(request, "base/chatpage.html")
 
 
 def create_message(request: HttpRequest) -> HttpResponse:
     content = request.POST.get("content")
-    username = request.session.get("username")
+    username = request.session
 
     if not username:
         return HttpResponse(status=403)
@@ -64,9 +64,10 @@ async def stream_chat_messages(request: HttpRequest) -> StreamingHttpResponse:
     return StreamingHttpResponse(event_stream(), content_type="text/event-stream")
 
 
-def welcomePage(request):
-
-    return render(request, "base/welcome.html", {})
+def welcomePage(request: HttpRequest):
+    request.session["username"] = "Issac"
+    hello = request.session.get("username")
+    return render(request, "base/welcome.html", {"what": hello})
 
 
 def privacyPage(request):
@@ -79,10 +80,6 @@ def homePage(request):
 
 def registration_page(request):
     return render(request, "base/registrationpage.html")
-
-
-# def chatpage(request):
-#     return render(request, "base/chatpage.html")
 
 
 def postpage(request):
