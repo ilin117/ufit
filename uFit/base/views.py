@@ -6,10 +6,11 @@ from django.contrib.auth import login
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login
-from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
-
+from django.db.models import Q
+""" from .models import Post
+ """
 # Create your views here.
 def welcomePage(request):
     return render(request, "base/welcome.html", {})
@@ -21,9 +22,15 @@ def privacyPage(request):
 
 @login_required
 def homePage(request):
-    posts = Post.objects.all()
+    q = request.GET.get('q') if request.GET.get('q') != None else ''
+    posts = Post.objects.filter(
+        Q(title__icontains=q) | 
+        Q(content__icontains=q) | 
+        Q(author__username__icontains=q)
+    )
     context = {"posts": posts}
     return render(request, "base/home.html", context)
+ 
 
 
 def registration_page(request):
