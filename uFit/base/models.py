@@ -1,6 +1,24 @@
 from django.db import models
+from django.contrib.auth.models import User
 from django.contrib.auth.models import AbstractUser
 from django.utils.timezone import now
+# Create your models here.
+class Post(models.Model):
+    host = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    ##topic = modles.ForeignKey(Topic, on_delete = models.SET_NULL, null = True)
+    description = models.TextField(null = True, blank = True)
+    
+    updated = models.DateTimeField(auto_now = True)
+    created = models.DateTimeField(auto_now_add = True)
+
+
+    class Meta:
+        ordering = ['-update', '-created']
+
+    def str(self):
+        return self.title
+
+
 
 # Extend User model for different roles
 class User(AbstractUser):
@@ -49,5 +67,3 @@ class WellnessOrganization(models.Model):
     description = models.TextField()
     contact_info = models.CharField(max_length=255)
     location = models.CharField(max_length=255)
-
-

@@ -11,7 +11,8 @@ urlpatterns = [path("", views.welcomePage, name="hello"),
                path("postpage/", views.postpage, name="postpage"),
                path("profilepage/", views.profilepage, name="profilepage"),
                path("loginpage/", views.login_page, name="loginpage"),
-               path('loginpage/', auth_views.LoginView.as_view(), name='loginpage'),
+               path('create-post/', views.createPost, name="create-post"),
+               path('update-post/<str:pk>', views.updatePost, name="update-post"),
                path('logout/', auth_views.LogoutView.as_view(), name='logout'),]
-
-
+""" path("loginpage/", views.login_page, name="loginpage"),
+               path('loginpage/', auth_views.LoginView.as_view(), name='loginpage'), """
