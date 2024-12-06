@@ -18,6 +18,6 @@ urlpatterns = [
         "stream-chat-messages/", views.stream_chat_messages, name="stream-chat-messages"
     ),
     path("lobby/", views.lobby, name="lobby"),
-    path("update-post/<str:pk>", views.updatePost, name="update-post"),
+    # path("update-post/<str:pk>", views.updatePost, name="update-post"),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
 ]
