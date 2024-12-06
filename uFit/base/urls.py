@@ -1,17 +1,18 @@
 from django.urls import path
 from . import views
+from django.contrib.auth import views as auth_views
 
-from . import views
 
-
-urlpatterns = [path("", views.say_hello, name="hello"),
+urlpatterns = [path("", views.welcomePage, name="hello"),
                path("privacy/", views.privacyPage, name="privacy"),
                path("home/", views.homePage, name="home"),
-               path("registration_page/", views.registration_page, name="registration_page"),
+               path("registrationpage/", views.registration_page, name="registrationpage"),
                path("chatpage/", views.chatpage, name="chatpage"),
                path("postpage/", views.postpage, name="postpage"),
                path("profilepage/", views.profilepage, name="profilepage"),
-               path("login_page/", views.login_page, name="login_page"),
+               path("loginpage/", views.login_page, name="loginpage"),
                path('create-post/', views.createPost, name="create-post"),
                path('update-post/<str:pk>', views.updatePost, name="update-post"),
-               ]
+               path('logout/', auth_views.LogoutView.as_view(), name='logout'),]
+""" path("loginpage/", views.login_page, name="loginpage"),
+               path('loginpage/', auth_views.LoginView.as_view(), name='loginpage'), """

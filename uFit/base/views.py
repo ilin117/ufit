@@ -1,61 +1,78 @@
 from django.shortcuts import render, redirect
 from .models import Post
 from .forms import PostForm
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
+from django.contrib import messages
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 
-'''posts=[
-    {'id':1, 'title':'how to do tricep extensions', 'body':'this is an explanation of how to do tricep extensions', 'host':'John Doe'},
-    {'id':2, 'title':'how to do bicep curls', 'body':'this is an explanation of how to do bicep curls', 'host':'John Doe'},
-    {'id':3, 'title':'how to squat' , 'body':'this is an explanation of how to do squats', 'host':'John Doe'},
-] '''
-
-post=[
-    {'id':1, 'title':'how to do tricep extensions', 'body':'this is an explanation of how to do tricep extensions', 'host':'John Doe'}
-]
 
 # Create your views here.
-def say_hello(request):
-    return render(request, "base/index.html", {})
+def welcomePage(request):
+    return render(request, "base/welcome.html", {})
+
 
 def privacyPage(request):
-    return render(request, 'base/privacy.html')
+    return render(request, "base/privacy.html")
+    return render(request, "base/privacy.html")
 
+@login_required
 def homePage(request):
     posts = Post.objects.all()
     context = {"posts": posts}
-    return render(request, 'base/home.html', context)
+    return render(request, "base/home.html", context)
+
 
 def registration_page(request):
-    return render(request, 'base/registration_page.html')
+    return render(request, "base/registrationpage.html")
+
 
 def chatpage(request):
-    return render(request, 'base/chatpage.html')
+    return render(request, "base/chatpage.html")
+
 
 def postpage(request):
-    return render(request, 'base/postpage.html', {'post':post}) 
+    return render(request, "base/postpage.html")
+
 
 def profilepage(request):
-    return render(request, 'base/profilepage.html')
+    return render(request, "base/profilepage.html")
+
 
 def login_page(request):
-    return render(request, 'base/login_page.html')
-
-def createPost(request):
-    form = PostForm()
-
     if request.method == 'POST':
-        form = PostForm(request.POST)
+        form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('home')
-        
-    context = {'form': form}
-    return render(request, 'base/post_form.html', context)
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)  # Log the user in
+                return redirect('home')  # Redirect to the home page after successful login
+            else:
+                messages.error(request, "Invalid username or password.")
+        else:
+            messages.error(request, "Invalid form submission.")
+    else:
+        form = AuthenticationForm()  # Display an empty login form
 
+    return render(request, 'base/loginpage.html', {'form': form})
 
-def updatePost(request,pk):
-    post = Post.objects.get(id=pk)
-    form = PostForm(instance = post)
+def registration_page(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()  # Save the new user
+            login(request, user)  # Log the user in immediately after registration
+            messages.success(request, "Registration successful!")  # Optional success message
+            return redirect('home')  # Redirect to home page after successful registration
+        else:
+            messages.error(request, "There was an error with your registration.")
+    else:
+        form = UserCreationForm()  # Display an empty form
 
+    return render(request, 'base/registrationpage.html', {'form': form})
 
-    context = {}
-    return render(request, 'base/post_form.html', context)
