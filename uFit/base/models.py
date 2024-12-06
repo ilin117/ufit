@@ -25,6 +25,9 @@ class User(models.Model):
 class Author(models.Model):
     name = models.CharField(max_length=500)
 
+    def __str__(self):
+        return self.name
+
 
 class Message(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
@@ -33,29 +36,6 @@ class Message(models.Model):
 
 
 # Extend User model for different roles
-class User(AbstractUser):
-    # Custom fields
-    role = models.CharField(
-        max_length=30,
-        choices=[
-            ("admin", "Administrator"),
-            ("trainer", "Trainer"),
-            ("student", "Student"),
-            ("Wellness Organization", "Wellness Organization"),
-        ],
-    )
-
-    # Related fields with unique `related_name`
-    groups = models.ManyToManyField(
-        "auth.Group",
-        related_name="base_user_groups",
-        blank=True,
-    )
-    user_permissions = models.ManyToManyField(
-        "auth.Permission",
-        related_name="base_user_permissions",
-        blank=True,
-    )
 
 
 # Personal Trainer Model

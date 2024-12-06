@@ -4,17 +4,53 @@ from django.http import HttpRequest, StreamingHttpResponse, HttpResponse
 from . import models
 import asyncio
 import json
-from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import authenticate, login
-from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+import random
+from datetime import datetime
 
 
 # Create your views here.
+def lobby(request: HttpRequest) -> HttpResponse:
+    if request.method == "POST":
+        username = request.POST.get("username")
+        if username:
+            request.session["username"] = username
+        else:
+            names = [
+                "Horatio",
+                "Benvolio",
+                "Mercutio",
+                "Lysander",
+                "Demetrius",
+                "Sebastian",
+                "Orsino",
+                "Malvolio",
+                "Hero",
+                "Bianca",
+                "Gratiano",
+                "Feste",
+                "Antonio",
+                "Lucius",
+                "Puck",
+                "Lucio",
+                "Goneril",
+                "Edgar",
+                "Edmund",
+                "Oswald",
+            ]
+            request.session["username"] = (
+                f"{random.choice(names)}-{hash(datetime.now().timestamp())}"
+            )
+
+        return redirect("home")
+    else:
+        return render(request, "base/lobby.html")
+
+
 def chatpage(request: HttpRequest) -> HttpResponse:
     if not request.session.get("username"):
         return redirect("home")
@@ -23,7 +59,7 @@ def chatpage(request: HttpRequest) -> HttpResponse:
 
 def create_message(request: HttpRequest) -> HttpResponse:
     content = request.POST.get("content")
-    username = request.session
+    username = request.session.get("username")
 
     if not username:
         return HttpResponse(status=403)
@@ -36,15 +72,22 @@ def create_message(request: HttpRequest) -> HttpResponse:
         return HttpResponse(status=200)
 
 
-# this'll make it so that the chats appear on screen as we submit it ong
 async def stream_chat_messages(request: HttpRequest) -> StreamingHttpResponse:
+    """
+    Streams chat messages to the client as we create messages.
+    """
+
     async def event_stream():
-        # do later
+        """
+        We use this function to send a continuous stream of data
+        to the connected clients.
+        """
         async for message in get_existing_messages():
             yield message
 
         last_id = await get_last_message_id()
 
+        # Continuously check for new messages
         while True:
             new_messages = (
                 models.Message.objects.filter(id__gt=last_id)
@@ -54,7 +97,9 @@ async def stream_chat_messages(request: HttpRequest) -> StreamingHttpResponse:
             async for message in new_messages:
                 yield f"data: {json.dumps(message)}\n\n"
                 last_id = message["id"]
-            await asyncio.sleep(0.1)
+            await asyncio.sleep(
+                0.1
+            )  # Adjust sleep time as needed to reduce db queries.
 
     async def get_existing_messages() -> AsyncGenerator:
         messages = (
@@ -73,13 +118,7 @@ async def stream_chat_messages(request: HttpRequest) -> StreamingHttpResponse:
 
 
 def welcomePage(request: HttpRequest):
-    request.session["username"] = "Issac"
-    hello = request.session.get("username")
-    return render(request, "base/welcome.html", {"what": hello})
-
-
-def welcomePage(request):
-    return render(request, "base/welcome.html", {})
+    return render(request, "base/welcome.html")
 
 
 def privacyPage(request):
@@ -108,6 +147,7 @@ def login_page(request):
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
             username = form.cleaned_data.get("username")
+            request.session["username"] = username
             password = form.cleaned_data.get("password")
             user = authenticate(request, username=username, password=password)
             if user is not None:

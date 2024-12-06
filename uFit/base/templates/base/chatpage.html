@@ -18,73 +18,68 @@
             <div id="sse-data"></div>
         </div>
 
-        <form class="message-form" @submit.prevent="submit" x-data="{state: 'composing', errors: {}}">
-            <div>
-                <textarea class="message-box" name="content" @input="state = 'composing'" autofocus
-                    placeholder="Your next message..."></textarea>
-                <button class="send-button">
-                    Send
-                </button>
-            </div>
+        <div>
+            <form class="message-form" @submit.prevent="submit" x-data="{state: 'composing', errors: {}}">
+                <div>
+                    <textarea class="message-box" name="content" @input="state = 'composing'" autofocus
+                        placeholder="Your next message..."></textarea>
+                    <button class="send-button">
+                        Send
+                    </button>
+                    <form action="{% url 'home' %}" method="get">
+                        <button type="submit">Return to Lobby</button>
+                    </form>
+                </div>
+            </form>
+        </div>
 
-            <div x-show="state === 'error'">
-                <p>
-                    Error sending your message ❌
-                </p>
-            </div>
-        </form>
 
-        <form action="{% url 'home' %}" method="get">
-            <button type="submit">Return to Lobby</button>
-        </form>
-    </div>
+        <script>
+            let eventSource;
+            const sseData = document.getElementById('sse-data');
 
-    <script>
-        let eventSource;
-        const sseData = document.getElementById('sse-data');
-
-        function startSSE() {
-            eventSource = new EventSource('/stream-chat-messages/');
-            eventSource.onmessage = event => {
-                const data = JSON.parse(event.data);
-                const messageHTML = `
+            function startSSE() {
+                eventSource = new EventSource('/stream-chat-messages/');
+                eventSource.onmessage = event => {
+                    const data = JSON.parse(event.data);
+                    const messageHTML = `
                     <div class="message-box">
                         <div class="message-author">${data.author__name}</div>
                         <div class="message-content">${data.content}</div>
                     </div>`;
-                sseData.innerHTML += messageHTML;
-            };
-        }
+                    sseData.innerHTML += messageHTML;
+                };
+            }
 
-        if (typeof (EventSource) !== 'undefined') {
-            startSSE();
-        } else {
-            sseData.innerHTML = 'Whoops! Your browser doesn\'t receive server-sent events.';
-        }
-    </script>
+            if (typeof (EventSource) !== 'undefined') {
+                startSSE();
+            } else {
+                sseData.innerHTML = 'Whoops! Your browser doesn\'t receive server-sent events.';
+            }
+        </script>
 
-    <script>
-        function submit(event) {
-            event.preventDefault();
-            const formData = new FormData(event.target);
+        <script>
+            function submit(event) {
+                event.preventDefault();
+                const formData = new FormData(event.target);
 
-            const endpointUrl = "/create-message/"
-            fetch(endpointUrl, {
-                method: "post",
-                body: formData,
-                headers: {
-                    'X-CSRFToken': '{{ csrf_token }}',
-                },
-            })
-                .then(response => {
-                    this.state = response.ok ? 'success' : 'error';
-                    return response.json();
+                const endpointUrl = "/create-message/"
+                fetch(endpointUrl, {
+                    method: "post",
+                    body: formData,
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}',
+                    },
                 })
-                .then(data => {
-                    this.errors = data.errors || {};
-                });
-        }
-    </script>
-    <script defer="" src="https://cdn.jsdelivr.net/npm/alpinejs@3.12.3/dist/cdn.min.js"></script>
+                    .then(response => {
+                        this.state = response.ok ? 'success' : 'error';
+                        return response.json();
+                    })
+                    .then(data => {
+                        this.errors = data.errors || {};
+                    });
+            }
+        </script>
+        <script defer="" src="https://cdn.jsdelivr.net/npm/alpinejs@3.12.3/dist/cdn.min.js"></script>
 </body>
 {% endblock content %}

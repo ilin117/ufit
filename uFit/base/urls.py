@@ -17,4 +17,5 @@ urlpatterns = [
     path(
         "stream-chat-messages/", views.stream_chat_messages, name="stream-chat-messages"
     ),
+    path("lobby/", views.lobby, name="lobby"),
 ]

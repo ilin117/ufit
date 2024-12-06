@@ -27,6 +27,13 @@
         </div>
     </div>
     <span id="uFit-logo">uFit</span>
+    {% if request.session.username %}
+    <div class="chatpage"><a class="chat-button" href="{% url 'chatpage' %}"><i class="bi bi-chat"></i></a>
+    </div>
+    {% else %}
+    <div class="chatpage"><a class="chat-button" href="{% url 'lobby' %}"><i class="bi bi-chat"></i></a>
+    </div>
+    {% endif %}
     <div class="profile">
         <img class="user-pic"
             src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg"
