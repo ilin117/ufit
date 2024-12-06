@@ -77,6 +77,13 @@
         <!-- Feed Section -->
         <div class="feed">
             <h2>Your Feed</h2>
+            {% csrf_token %}
+            {% for post in posts %}
+            <div class = "post">
+                <a href="{% url 'update-post' post.id %}">Edit</a>
+                <h3>{{ post.host }}</h3>
+            </div>
+            {% endfor %}
             <div class="post">
                 <h3>@user_profile</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ultricies neque non velit interdum pulvinar quis id orci. Ut lacus ex, malesuada sit amet sem eu, ultricies ultricies turpis. Vestibulum at lorem vestibulum, placerat metus placerat, suscipit lectus. Nunc eget magna nec ipsum interdum suscipit ac ac lorem. Donec in est ornare, 

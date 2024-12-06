@@ -11,4 +11,7 @@ urlpatterns = [path("", views.say_hello, name="hello"),
                path("chatpage/", views.chatpage, name="chatpage"),
                path("postpage/", views.postpage, name="postpage"),
                path("profilepage/", views.profilepage, name="profilepage"),
-               path("login_page/", views.login_page, name="login_page"),]
+               path("login_page/", views.login_page, name="login_page"),
+               path('create-post/', views.createPost, name="create-post"),
+               path('update-post/<str:pk>', views.updatePost, name="update-post"),
+               ]
