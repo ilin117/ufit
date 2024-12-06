@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from .models import Post
+from .forms import PostForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib import messages
@@ -19,7 +21,9 @@ def privacyPage(request):
 
 @login_required
 def homePage(request):
-    return render(request, "base/home.html")
+    posts = Post.objects.all()
+    context = {"posts": posts}
+    return render(request, "base/home.html", context)
 
 
 def registration_page(request):
