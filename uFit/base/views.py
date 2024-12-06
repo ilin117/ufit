@@ -1,5 +1,6 @@
 from typing import AsyncGenerator
 from django.shortcuts import render, redirect
+from .models import Post
 from django.http import HttpRequest, StreamingHttpResponse, HttpResponse
 from . import models
 import asyncio
@@ -127,7 +128,9 @@ def privacyPage(request):
 
 @login_required
 def homePage(request):
-    return render(request, "base/home.html")
+    posts = Post.objects.all()
+    context = {"posts": posts}
+    return render(request, "base/home.html", context)
 
 
 def postpage(request):
