@@ -130,10 +130,6 @@ def homePage(request):
     return render(request, "base/home.html")
 
 
-def registration_page(request):
-    return render(request, "base/registrationpage.html")
-
-
 def postpage(request):
     return render(request, "base/postpage.html")
 
