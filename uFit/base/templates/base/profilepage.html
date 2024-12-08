@@ -110,7 +110,7 @@
                 <img src="{{ user.profile.profile_image.url|default:'https://via.placeholder.com/150' }}" alt="User Profile" class="profile-image" id="profileImage">
             </label>
             <h2>{{ user.username }}</h2>
-        
+            <p>Role: {{ user.profile.role }}</p>
             <div class="action-buttons">
                 <a href="{% url 'update-profile' user.id %}" class="edit-button">Edit Profile</a>
                 <a href="{% url 'postpage' %}" class="createpost-button">Create Post</a>

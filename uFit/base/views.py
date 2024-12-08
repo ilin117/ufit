@@ -252,28 +252,21 @@ def updatePost(request, pk):
 
 @login_required
 def update_profile(request, pk):
-    # Ensure the user exists
     try:
         user = User.objects.get(pk=pk)
     except User.DoesNotExist:
         raise Http404("User does not exist")
 
-    # Ensure the user is the same as the current user or is an admin
     if user != request.user and not request.user.is_staff:
         raise Http404("You do not have permission to update this user's profile")
 
-    # Ensure the profile exists
-    try:
-        profile, created = Profile.objects.get_or_create(user=user)
-    except User.DoesNotExist:
-        raise Http404("User does not have a profile")
+    profile, created = Profile.objects.get_or_create(user=user)
 
     if request.method == "POST":
         form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
             return redirect("profilepage", pk=request.user.pk)
-
     else:
         form = ProfileForm(instance=profile)
 
