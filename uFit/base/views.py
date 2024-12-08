@@ -149,20 +149,29 @@ def homePage(request):
     context = {"posts": posts}
     return render(request, "base/home.html", context)
 
+# uFit/base/views.py
 
+from django.shortcuts import render, redirect
+from .models import Post
+from django.contrib.auth.decorators import login_required
+
+@login_required
 def postpage(request):
-    form = PostForm()
     if request.method == 'POST':
-        Post.objects.create(
-            host = request.user,
-            title = request.POST.get('title'),
-            body = request.POST.get('body'),
-            created = datetime.now()
-        )
-        return redirect('home')
-    context = {'form': form}
-    return render(request, "base/postpage.html")
-
+        form = PostForm(request.POST)
+        print(form.is_valid)
+        if form.is_valid():
+            print("FOrm is vaLIDDD")
+            post = form.save(commit=False)
+            post.host = request.user
+            post.created = datetime.now()
+            post.save()
+            return redirect('home')
+    else:
+        print("thfiaohefhaofo")
+        form = PostForm()
+    context = {"form" : form}
+    return render(request, 'base/postpage.html', context)
 
 def profilepage(request, pk):
     user = get_object_or_404(User, pk=pk)
@@ -229,7 +238,8 @@ def search_posts(request):
     return JsonResponse(list(posts), safe=False)
 
 @login_required
-def profile_page(request):
+def profile_page(request, pk):
+    user = get_object_or_404(User, pk=pk)
     if request.method == 'POST':
         profile = request.user.profile
         profile.bio = request.POST['bio']
@@ -242,15 +252,15 @@ def profile_page(request):
     return render(request, 'profilepage.html', {'user': request.user, 'posts': posts})
 
 @login_required
-def updatePost(request, post_id):
-    post = get_object_or_404(Post, id=post_id, host=request.user)
+def updatePost(request, pk):
+    post = get_object_or_404(Post, id=pk, host=request.user)
 
     if request.method == 'POST':
         form = PostForm(request.POST, instance=post)
         if form.is_valid():
             form.save()
             messages.success(request, "Post updated successfully!")
-            return redirect('postpage')
+            return redirect('home')
         else:
             messages.error(request, "There was an error updating your post.")
     else:

@@ -80,7 +80,7 @@ a post button
 .editor{
     width: 100%;
 }
-        ..post-form {
+        .post-form {
           max-width: 500px;
           margin: 40px auto;
           padding: 20px;
@@ -134,14 +134,11 @@ a post button
 <body>
     <div class="container">
         <div class="editor">
+            <form class="post-form" method="POST">
+                {% csrf_token %}
 
-            <form class="post-form">
-        {% csrf_token %}
               <h2>Create a new post</h2>
-              <label for="title">Title:</label>
-              <input type="text" id="title" name="title">
-              <label for="content">Content:</label>
-              <textarea id="content" name="content"></textarea>
+              {{ form.as_p}}
               <button type="submit">Create post</button>
             </form>
         </div>
