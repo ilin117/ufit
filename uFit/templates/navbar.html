@@ -36,19 +36,26 @@
     </div>
     {% endif %}
     <div class="profile">
-        <img class="user-pic"
-            src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg"
-            onclick="toggleMenu()">
-        <div class="profile-options-wrap" id="profileOptions">
-            <div class="profile-options">
-                <div class="user-info">
-                    <img
-                        src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg">
-                    <h3>@{{ user.username }}</h3>
+        {% if user.is_authenticated %}
+            <img class="user-pic"
+                 src="{{ user.profile.profile_image.url|default:'https://via.placeholder.com/35' }}"
+                 alt="{{ user.username }}'s Profile Picture"
+                 onclick="toggleMenu()">
+            <div class="profile-options-wrap" id="profileOptions">
+                <div class="profile-options">
+                    <div class="user-info">
+                        <img
+                            src="{{ user.profile.profile_image.url|default:'https://via.placeholder.com/60' }}">
+                        <h3>{{ user.username }}</h3>
+                    </div>
+                    <a href="{% url 'profilepage' user.id %}" class="options-links">Edit Profile</a>
+                    <a href="{% url 'logout' %}" class="options-links">Logout</a>
                 </div>
-                <a href="{% url 'profilepage' user.id %}" class="options-links">Edit Profile</a>
-                <a href="{% url 'loginpage' %}" class="options-links">Logout</a>
             </div>
+        {% else %}
+            <a href="{% url 'loginpage' %}" class="options-links">Login</a>
+        {% endif %}
+    </div>
         </div>
     </div>
 </div>

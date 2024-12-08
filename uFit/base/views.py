@@ -272,7 +272,8 @@ def update_profile(request, pk):
         form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
-            return redirect("profilepage", pk=pk)
+            return redirect("profilepage", pk=request.user.pk)
+
     else:
         form = ProfileForm(instance=profile)
 
