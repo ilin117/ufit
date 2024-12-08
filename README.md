@@ -102,7 +102,7 @@ python manage.py runserver
 ---
 
 ## 📸 Screenshots  
-![Welcome Page](References/welcome.png "Welcome Page") 
+![Welcome Page](References/welcomepage.png "Welcome Page") 
 ![Registration Page](References/registration.png "Registration Page") 
 ![Home Page](References/homepage.png "Home Page") 
 
