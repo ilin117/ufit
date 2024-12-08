@@ -1,0 +1,17 @@
+
+{% block content %}
+{% if posts.exists %}
+                {% for post in posts %}
+                <div class="post">
+                   <a href="{% url 'profilepage' post.host.id %}"><h3>@{{ post.host.username }}</h3></a>
+                    <p>{{ post.body }}</p>
+                    {% if request.user == post.host %}
+                    <a href="{% url 'update-post' post.id %}">Edit</a>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            {% else %}
+                <p>No posts found matching your search.</p>
+            {% endif %}
+
+            {% endblock content %}

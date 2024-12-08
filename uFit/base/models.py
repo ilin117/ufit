@@ -33,6 +33,7 @@ class Post(models.Model):
 
 class User(models.Model):
     id = models.AutoField(primary_key=True)
+    bio = models.TextField()
     username = models.CharField(max_length=200)
     password = models.CharField(max_length=200)
 

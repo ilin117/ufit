@@ -26,7 +26,7 @@
             <a href="" class="options-links">Added</a>
         </div>
     </div>
-    <a href="{% url 'home' %}"><span id="uFit-logo">uFit</span></a>
+    <a href="{% url 'home' %}" style="text-decoration: none;" id="uFit-logo" ><span  >uFit</span></a>
     
     {% if request.session.username %}
     <div class="chatpage"><a class="chat-button" href="{% url 'chatpage' %}"><i class="bi bi-chat"></i></a>
