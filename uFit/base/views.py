@@ -2,7 +2,7 @@ from typing import AsyncGenerator
 from django.shortcuts import render, redirect
 from .models import Post
 from .forms import PostForm
-from django.http import HttpRequest, StreamingHttpResponse, HttpResponse
+from django.http import HttpRequest, StreamingHttpResponse, HttpResponse, JsonResponse
 from . import models
 import asyncio
 import json
@@ -13,6 +13,9 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 import random
 from datetime import datetime
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
+from django.db.models import Q
 
 from django.db.models import Q
 """ from .models import Post
@@ -131,13 +134,19 @@ def privacyPage(request):
 
 @login_required
 def homePage(request):
-    """ q = request.GET.get('q') if request.GET.get('q') != None else ''
-    posts = Post.objects.filter(
-        Q(title__icontains=q) | 
-        Q(content__icontains=q) | 
-        Q(author__username__icontains=q)
-    ) """
-    context = {"posts": []}
+    query = request.GET.get("q", "")
+    
+    if query:
+        # Ensure the correct model fields are used
+        posts = Post.objects.filter(
+            Q(title__icontains=query) | 
+            Q(body__icontains=query) | 
+            Q(host__username__icontains=query)
+        )
+    else:
+        posts = Post.objects.all()
+
+    context = {"posts": posts}
     return render(request, "base/home.html", context)
 
 
@@ -190,3 +199,18 @@ def registration_page(request):
         form = UserCreationForm()  # Display an empty form
 
     return render(request, "base/registrationpage.html", {"form": form})
+
+@csrf_exempt
+@login_required
+def search_posts(request):
+    query = request.GET.get("q", "")
+    if query:
+        posts = Post.objects.filter(
+            Q(host__username__icontains=query) | 
+            Q(title__icontains=query) | 
+            Q(body__icontains=query)
+        ).values("host__username", "title", "body")
+    else:
+        posts = []
+
+    return JsonResponse(list(posts), safe=False)

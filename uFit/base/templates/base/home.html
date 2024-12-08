@@ -7,92 +7,105 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'styles/style.css' %}">
     <title>UFIT Home Page</title>
-
 </head>
 <body>
     {% include 'navbar.html' %}
+
     <div class="container">
-        
+
         <!-- Feed Section -->
         <div class="feed">
             <h2>Your Feed</h2>
 
-            <div class="searchBar"><form class="header__search" action="{% url 'home' %}" method="GET">
-                <label>
-                  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-                    <title>search</title>
-                    <path
-                      d="M32 30.586l-10.845-10.845c1.771-2.092 2.845-4.791 2.845-7.741 0-6.617-5.383-12-12-12s-12 5.383-12 12c0 6.617 5.383 12 12 12 2.949 0 5.649-1.074 7.741-2.845l10.845 10.845 1.414-1.414zM12 22c-5.514 0-10-4.486-10-10s4.486-10 10-10c5.514 0 10 4.486 10 10s-4.486 10-10 10z"
-                    ></path>
-                  </svg>
-                  <input name="q" placeholder="Search for posts" />
-                </label>
-              </form></div>
+            <!-- Search Bar with Username Autofill -->
+            <div class="searchBar">
+                <form class="header__search" action="{% url 'home' %}" method="GET" style="display: inline;">
+                    <input type="text" id="search-input" name="q" placeholder="Search by title, content, or username" autocomplete="off">
+                </form>
+                
+                <!-- Post Icon -->
+                <a href="{% url 'postpage' %}" class="post-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                        <path d="M8 1a7 7 0 1 1 0 14A7 7 0 0 1 8 1zM8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0z" />
+                        <path d="M8 4a.5.5 0 0 1 .5.5V7h2.5a.5.5 0 0 1 0 1H8.5v2.5a.5.5 0 0 1-1 0V8H5a.5.5 0 0 1 0-1h2.5V4.5A.5.5 0 0 1 8 4z" />
+                    </svg>
+                </a>
+            </div>                 
 
-            {% csrf_token %}
-            {% for post in posts %}
-            <div class = "post">
-                <a href="{% url 'update-post' post.id %}">Edit</a>
-                <h3>{{ post.host }}</h3>
-            </div>
-            {% endfor %}
 
+            <!-- Filler Posts -->
             <div class="post">
                 <h3>@rachelbrooks</h3>
                 <p>Just completed an amazing workout focusing on endurance and flexibility. 
                     My goal this week is to improve my core strength and stay consistent with my weightlifting routine. Feeling motivated! Let’s keep pushing!</p>
             </div>
+
             <div class="post">
                 <h3>@james12booker</h3>
                 <p>Upped my deadlift PR by 20 lbs today! Consistency is key. Looking forward to smashing more goals this month!</p>
             </div>
+
             <div class="post">
                 <h3>@coach_tien</h3>
                 <p>Helping clients crush their fitness goals this week! Remember, consistency beats intensity. Focus on form and stay committed to your routine. This week’s tip: Incorporate compound exercises like squats and deadlifts for maximum results. 
                     Let's stay disciplined and keep pushing toward greatness! 💥🔥 #TrainHard #StayStrong #PersonalTrainerTips 
                 </p>
             </div>
-            <!-- Add more posts as needed -->
+
+            {% if posts.exists %}
+                {% for post in posts %}
+                <div class="post">
+                    <h3>{{ post.host.username }}</h3>
+                    <p>{{ post.body }}</p>
+                    <a href="{% url 'update-post' post.id %}">Edit</a>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p>No posts found matching your search.</p>
+            {% endif %}
         </div>
 
         <!-- Events Section -->
         <div class="events">
             <h2>Events</h2>
-            <div class="day">
-                <h3>Monday</h3>
-                <p>No events today.</p>
-            </div>
-            <div class="day">
-                <h3>Tuesday</h3>
-                <p>Yoga class at 6:00 PM.</p>
-            </div>
-            <div class="day">
-                <h3>Wednesday</h3>
-                <p>Group run at 7:00 AM. </p>
-                <p>Outdoor Cycling Ride at 12:00 PM.</p>
-            </div>
-            <div class="day">
-                <h3>Thursday</h3>
-                <p>Nutrition workshop at 12:00 PM.</p>
-            </div>
-            <div class="day">
-                <h3>Friday</h3>
-                <p>Lift workout at 2:00 PM.</p>
-                <p>Pilates class at 6:30 PM.</p>
-            </div>
-            <div class="day">
-                <h3>Saturday</h3>
-                <p>Weekend hike at 8:00 AM.</p>
-            </div>
-            <div class="day">
-                <h3>Sunday</h3>
-                <p>Rest day - No events.</p>
-            </div>
+            <div class="day"><h3>Monday</h3><p>No events today.</p></div>
+            <div class="day"><h3>Tuesday</h3><p>Yoga class at 6:00 PM.</p></div>
+            <div class="day"><h3>Wednesday</h3><p>Group run at 7:00 AM.</p><p>Outdoor Cycling Ride at 12:00 PM.</p></div>
+            <div class="day"><h3>Thursday</h3><p>Nutrition workshop at 12:00 PM.</p></div>
+            <div class="day"><h3>Friday</h3><p>Lift workout at 2:00 PM.</p><p>Pilates class at 6:30 PM.</p></div>
+            <div class="day"><h3>Saturday</h3><p>Weekend hike at 8:00 AM.</p></div>
+            <div class="day"><h3>Sunday</h3><p>Rest day - No events.</p></div>
         </div>
     </div>
 
     {% include 'footer.html' %}
+
+    <script>
+    document.getElementById("search-input").addEventListener("input", function() {
+        const query = this.value;
+
+        if (query.length > 1) {
+            fetch(`/search-posts/?q=${query}`, {
+                method: "GET",
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                const suggestions = document.getElementById("suggestions");
+                suggestions.innerHTML = "";
+
+                data.forEach((post) => {
+                    const li = document.createElement("li");
+                    li.textContent = `${post.host__username}: ${post.title}`;
+                    li.addEventListener("click", () => {
+                        document.getElementById("search-input").value = post.host__username;
+                        suggestions.innerHTML = "";
+                    });
+                    suggestions.appendChild(li);
+                });
+            });
+        }
+    });
+    </script>
+
 </body>
 </html>
-
-
