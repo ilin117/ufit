@@ -26,7 +26,7 @@ urlpatterns = [
     path("search-posts/", views.search_posts, name="search-posts"),
     path("home/profilepage/<str:pk>", views.profilepage, name="profilepage"),
     path("update-profile/<int:pk>", views.update_profile, name="update-profile"),
-
+    path("add-event/", views.add_event, name="add-event"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

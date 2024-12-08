@@ -1,6 +1,6 @@
 
 {% block content %}
-{% if posts.exists %}
+{% if posts %}
                 {% for post in posts %}
                 <div class="post">
                    <a href="{% url 'profilepage' post.host.id %}"><h2>@{{ post.host.username }}</h2 ></a>

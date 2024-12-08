@@ -66,3 +66,12 @@ class Message(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
+class Event(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    date = models.DateField()
+    time = models.TimeField()
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name="events")
+    
+    def __str__(self):
+        return self.title
