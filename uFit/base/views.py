@@ -1,6 +1,6 @@
 from typing import AsyncGenerator
 from django.shortcuts import render, redirect
-from .models import Post
+from .models import Post, User
 from .forms import PostForm
 from django.http import HttpRequest, StreamingHttpResponse, HttpResponse, JsonResponse
 from . import models
@@ -16,8 +16,8 @@ from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q
-
-from django.db.models import Q
+from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.models import User
 """ from .models import Post
  """
 # Create your views here.
@@ -164,8 +164,11 @@ def postpage(request):
     return render(request, "base/postpage.html")
 
 
-def profilepage(request):
-    return render(request, "base/profilepage.html")
+def profilepage(request, pk):
+    user = get_object_or_404(User, pk=pk)
+    posts = Post.objects.filter(host=user)
+    context = {"user": user, "posts": posts}
+    return render(request, "base/profilepage.html", context)
 
 
 def login_page(request):

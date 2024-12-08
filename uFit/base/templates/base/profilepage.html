@@ -1,0 +1,72 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="profile-page">
+    <div class="profile-header">
+        <img class="profile-picture" src="https://via.placeholder.com/150" alt="Profile Picture">
+        <h1 class="profile-username">@{{ user.username }}</h1>
+    </div>
+
+    <div class="profile-details">
+        <h2>About Me</h2>
+        <p>{{ user.profile.bio }}</p>
+    </div>
+
+    <div class="profile-actions">
+      <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+    </div>
+    <div class="profile-posts">
+        <h2>My Posts</h2>
+        <ul>
+        {% for post in posts %}
+            <li>
+                
+                    <h3>{{ post.title }}</h3>
+                    <p>{{ post.body }}</p>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<style>
+    .profile-page {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .profile-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    .profile-picture {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        margin-right: 20px;
+    }
+    .profile-username {
+        font-size: 32px;
+        font-weight: bold;
+    }
+    .profile-details {
+        margin-bottom: 20px;
+    }
+    .profile-actions a {
+        margin-right: 10px;
+        padding: 10px 20px;
+        background-color: rgba(32, 201, 151, 1);
+        color: white;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+    }
+    .profile-actions a:hover {
+        background-color: rgba(24, 155, 116, 1);
+    }
+</style>
+{% endblock content %}
