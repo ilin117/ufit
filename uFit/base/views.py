@@ -1,8 +1,8 @@
 from typing import AsyncGenerator
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Post
 from .forms import PostForm
-from django.http import HttpRequest, StreamingHttpResponse, HttpResponse, JsonResponse
+from django.http import HttpRequest, StreamingHttpResponse, HttpResponse, JsonResponse, HttpResponseRedirect
 from . import models
 import asyncio
 import json
@@ -214,3 +214,14 @@ def search_posts(request):
         posts = []
 
     return JsonResponse(list(posts), safe=False)
+
+def updatePost(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == "POST":
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect("/home/")  # Redirect to the home page
+    else:
+        form = PostForm(instance=post)
+    return render(request, "update_post.html", {"form": form})

@@ -20,5 +20,6 @@ urlpatterns = [
     path("lobby/", views.lobby, name="lobby"),
     # path("update-post/<str:pk>", views.updatePost, name="update-post"),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
+    path("update-post/<int:pk>/", views.updatePost, name="update-post"),
     path("search-posts/", views.search_posts, name="search-posts"),
 ]
