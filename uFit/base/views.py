@@ -3,7 +3,7 @@ from typing import AsyncGenerator
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Post, Profile
 from .forms import PostForm, ProfileForm
-from django.http import HttpRequest, StreamingHttpResponse, HttpResponse, JsonResponse, HttpResponseRedirect
+from django.http import Http404, HttpRequest, StreamingHttpResponse, HttpResponse, JsonResponse, HttpResponseRedirect
 from . import models
 import asyncio
 import json
@@ -252,23 +252,29 @@ def updatePost(request, pk):
 
 @login_required
 def update_profile(request, pk):
-    
     # Ensure the user exists
-    if not request.user.is_authenticated:
-        return redirect("loginpage")
+    try:
+        user = User.objects.get(pk=pk)
+    except User.DoesNotExist:
+        raise Http404("User does not exist")
+
+    # Ensure the user is the same as the current user or is an admin
+    if user != request.user and not request.user.is_staff:
+        raise Http404("You do not have permission to update this user's profile")
 
     # Ensure the profile exists
     try:
-        profile, created = Profile.objects.get_or_create(user=request.user)
+        profile, created = Profile.objects.get_or_create(user=user)
     except User.DoesNotExist:
-        return redirect("loginpage")
+        raise Http404("User does not have a profile")
 
     if request.method == "POST":
         form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
-            return redirect("profilepage")
+            return redirect("profilepage", pk=pk)
     else:
         form = ProfileForm(instance=profile)
 
     return render(request, "base/update-profile.html", {"form": form})
+   

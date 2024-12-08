@@ -24,7 +24,7 @@ urlpatterns = [
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
     path("update-post/<int:pk>/", views.updatePost, name="update-post"),
     path("search-posts/", views.search_posts, name="search-posts"),
-    path("update-profile/<str:pk>", views.update_profile, name="update-profile"),
+    path("update-profile/<int:pk>", views.update_profile, name="update-profile"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
