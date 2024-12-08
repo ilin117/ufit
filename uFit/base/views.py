@@ -151,6 +151,16 @@ def homePage(request):
 
 
 def postpage(request):
+    form = PostForm()
+    if request.method == 'POST':
+        Post.objects.create(
+            host = request.user,
+            title = request.POST.get('title'),
+            body = request.POST.get('body'),
+            created = datetime.now()
+        )
+        return redirect('home')
+    context = {'form': form}
     return render(request, "base/postpage.html")
 
 
@@ -214,3 +224,24 @@ def search_posts(request):
         posts = []
 
     return JsonResponse(list(posts), safe=False)
+
+def updatePost(request, pk):
+    post = Post.objects.get(id=pk)
+    if request.method == 'POST':
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = PostForm(instance=post)
+    context = {'form': form}
+    return render(request, "base/updatepost.html", context)
+    post = Post.objects.get(id=pk)
+    form = PostForm(instance=post)
+    if request.method == 'POST':
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    context = {'form': form}
+    return render(request, "base/updatepost.html", context)
