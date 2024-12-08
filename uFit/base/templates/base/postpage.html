@@ -83,6 +83,20 @@ a post button
     <div class="container">
         <div class="editor">
             <h2>Create Post</h2>
+
+            <form method="POST">
+                {% csrf_token %}
+                <div>
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" name="title" required>
+                </div>
+                <div>
+                    <label for="body">Body:</label>
+                    <textarea id="body" name="body" rows="5" required></textarea>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
             {% for post in post %}
             <div class = "post">
                 <div class="container">

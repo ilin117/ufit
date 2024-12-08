@@ -135,3 +135,6 @@ ASGI_APPLICATION = "uFit.asgi.application"
 
 LOGIN_REDIRECT_URL = "base/home"  # Redirect to home page after login
 LOGOUT_REDIRECT_URL = "base/loginpage"  # Redirect to login page after
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
