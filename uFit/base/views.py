@@ -1,7 +1,7 @@
 from typing import AsyncGenerator
 from django.shortcuts import render, redirect
 from .models import Post
-from .forms import PostForm
+from .forms import PostForm, ProfileUpdateForm
 from django.http import HttpRequest, StreamingHttpResponse, HttpResponse, JsonResponse
 from . import models
 import asyncio
@@ -16,8 +16,8 @@ from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q
-
-from django.db.models import Q
+from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.models import User
 """ from .models import Post
  """
 # Create your views here.
@@ -149,13 +149,35 @@ def homePage(request):
     context = {"posts": posts}
     return render(request, "base/home.html", context)
 
+# uFit/base/views.py
 
+from django.shortcuts import render, redirect
+from .models import Post
+from django.contrib.auth.decorators import login_required
+
+@login_required
 def postpage(request):
-    return render(request, "base/postpage.html")
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        print(form.is_valid)
+        if form.is_valid():
+            print("FOrm is vaLIDDD")
+            post = form.save(commit=False)
+            post.host = request.user
+            post.created = datetime.now()
+            post.save()
+            return redirect('home')
+    else:
+        print("thfiaohefhaofo")
+        form = PostForm()
+    context = {"form" : form}
+    return render(request, 'base/postpage.html', context)
 
-
-def profilepage(request):
-    return render(request, "base/profilepage.html")
+def profilepage(request, pk):
+    user = get_object_or_404(User, pk=pk)
+    posts = Post.objects.filter(host=user)
+    context = {"user": user, "posts": posts}
+    return render(request, "base/profilepage.html", context)
 
 
 def login_page(request):
@@ -214,3 +236,34 @@ def search_posts(request):
         posts = []
 
     return JsonResponse(list(posts), safe=False)
+
+@login_required
+def profile_page(request, pk):
+    user = get_object_or_404(User, pk=pk)
+    if request.method == 'POST':
+        profile = request.user.profile
+        profile.bio = request.POST['bio']
+        if 'profile_image' in request.FILES:
+            profile.profile_image = request.FILES['profile_image']
+        profile.save()
+        return redirect('profile_page')
+
+    posts = request.user.posts.all()
+    return render(request, 'profilepage.html', {'user': request.user, 'posts': posts})
+
+@login_required
+def updatePost(request, pk):
+    post = get_object_or_404(Post, id=pk, host=request.user)
+
+    if request.method == 'POST':
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Post updated successfully!")
+            return redirect('home')
+        else:
+            messages.error(request, "There was an error updating your post.")
+    else:
+        form = PostForm(instance=post)
+
+    return render(request, 'base/updatepost.html', {'form': form, 'post': post})

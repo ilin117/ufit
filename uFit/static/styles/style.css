@@ -6,6 +6,7 @@
 }
 
 .uFit-nav {
+    width: 100%;
     background-color: rgba(255, 255, 255, 1);
     position: sticky;
     font-size: 35px;

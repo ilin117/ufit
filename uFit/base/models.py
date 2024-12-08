@@ -7,6 +7,12 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 # Create your models here.
+ROLE_CHOICES = [
+    ('Student', 'Student'),
+    ('Trainer', 'Trainer'),
+    ('Wellness Organization', 'Wellness Organization')
+]
+
 class Post(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=200)
@@ -26,6 +32,8 @@ class Post(models.Model):
 
 
 class User(models.Model):
+    id = models.AutoField(primary_key=True)
+    bio = models.TextField()
     username = models.CharField(max_length=200)
     password = models.CharField(max_length=200)
 
@@ -41,3 +49,8 @@ class Message(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    bio = models.TextField(blank=True, default="No bio provided.")
+    profile_image = models.ImageField(upload_to="profile_images/", default="default.png")
