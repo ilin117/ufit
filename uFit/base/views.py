@@ -1,7 +1,7 @@
 from typing import AsyncGenerator
 from django.shortcuts import render, redirect
-from .models import Post, User
-from .forms import PostForm
+from .models import Post
+from .forms import PostForm, ProfileUpdateForm
 from django.http import HttpRequest, StreamingHttpResponse, HttpResponse, JsonResponse
 from . import models
 import asyncio
@@ -228,23 +228,15 @@ def search_posts(request):
 
     return JsonResponse(list(posts), safe=False)
 
-def updatePost(request, pk):
-    post = Post.objects.get(id=pk)
+@login_required
+def profile_page(request):
     if request.method == 'POST':
-        form = PostForm(request.POST, instance=post)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-    else:
-        form = PostForm(instance=post)
-    context = {'form': form}
-    return render(request, "base/updatepost.html", context)
-    post = Post.objects.get(id=pk)
-    form = PostForm(instance=post)
-    if request.method == 'POST':
-        form = PostForm(request.POST, instance=post)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-    context = {'form': form}
-    return render(request, "base/updatepost.html", context)
+        profile = request.user.profile
+        profile.bio = request.POST['bio']
+        if 'profile_image' in request.FILES:
+            profile.profile_image = request.FILES['profile_image']
+        profile.save()
+        return redirect('profile_page')
+
+    posts = request.user.posts.all()
+    return render(request, 'profilepage.html', {'user': request.user, 'posts': posts})
