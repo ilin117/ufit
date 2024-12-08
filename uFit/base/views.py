@@ -54,7 +54,7 @@ def lobby(request: HttpRequest) -> HttpResponse:
                 f"{random.choice(names)}-{hash(datetime.now().timestamp())}"
             )
 
-        return redirect("home")
+        return redirect("chatpage")
     else:
         return render(request, "base/lobby.html")
 

@@ -2,7 +2,7 @@
 
 /* the nav bar */
 * {
-    font-family: "Inter", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .uFit-nav {
@@ -16,6 +16,25 @@
 }
 
 #uFit-logo {
+  letter-spacing: 2px;
+  margin-left: auto;
+  margin-right: auto;
+  color: rgba(32, 201, 151, 1);
+  font-weight: bold;
+  font-style: italic;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: rgba(0, 0, 0, 1);
+  paint-order: stroke fill;
+  text-decoration: none;
+}
+
+#uFit-logo a {
+  text-decoration: none;
+  color: rgba(32, 201, 151, 1);
+
+}
+
+#uFit-nav a #uFit-logo{
     letter-spacing: 2px;
     margin-left: auto;
     margin-right: auto;
@@ -25,6 +44,7 @@
     -webkit-text-stroke-width: 2px;
     -webkit-text-stroke-color: rgba(0, 0, 0, 1);
     paint-order: stroke fill;
+    text-decoration: none;
 }
 
 #uFit-nav a #uFit-logo{
@@ -42,333 +62,339 @@
 
 /* makes it so that the buttons doesn't look buttony??? */
 button {
-    all: unset;
+  all: unset;
 }
 
 button:focus {
-    outline: revert;
+  outline: revert;
 }
 
 /*  sidebar-options styling */
 .sidebar-options {
-    font-weight: 600;
-    font-size: 14px;
-    text-decoration: none;
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: rgba(235, 229, 252, 1);
-    overflow-x: hidden;
-    padding-top: 60px;
-    transition: 0.5s;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgba(235, 229, 252, 1);
+  overflow-x: hidden;
+  padding-top: 60px;
+  transition: 0.5s;
 }
 
 .sidebar-options span {
-    padding: 8px 8px 20px 32px;
-    letter-spacing: 1.5px;
-    font-weight: 600;
-    color: rgba(171, 181, 190, 1);
-    font-size: 16px;
+  padding: 8px 8px 20px 32px;
+  letter-spacing: 1.5px;
+  font-weight: 600;
+  color: rgba(171, 181, 190, 1);
+  font-size: 16px;
 }
 
 .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-    transition: 0.3s;
-    cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+  transition: 0.3s;
+  cursor: pointer;
 }
 
 .closebtn:hover {
-    color: rgba(32, 201, 151, 1);
+  color: rgba(32, 201, 151, 1);
 }
 
 .openbtn {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 /* profile dropdown styling*/
 .user-pic {
-    width: 35px;
-    border-radius: 50%;
-    cursor: pointer;
+  width: 35px;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 .profile-options-wrap {
-    position: absolute;
-    right: -145px;
-    width: 400px;
-    height: 0px;
-    overflow: hidden;
-    transition: height 0.6s;
+  position: absolute;
+  right: -145px;
+  width: 400px;
+  height: 0px;
+  overflow: hidden;
+  transition: height 0.6s;
 }
 
 .profile-options-wrap.open-options {
-    height: 200px;
+  height: 200px;
 }
 
 .profile-options {
-    width: 200px;
-    background: rgba(235, 229, 252, 1);
-    padding: 20px;
-    margin: 10px;
-    right: 125px;
-    top: -10px;
-    position: absolute;
+  width: 200px;
+  background: rgba(235, 229, 252, 1);
+  padding: 20px;
+  margin: 10px;
+  right: 125px;
+  top: -10px;
+  position: absolute;
 }
 
 .user-info {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .user-info h3 {
-    font-weight: 600;
-    font-size: 14px;
+  font-weight: 600;
+  font-size: 14px;
 }
 
 .user-info img {
-    width: 60px;
-    border-radius: 50%;
-    margin-right: 15px;
+  width: 60px;
+  border-radius: 50%;
+  margin-right: 15px;
 }
 
 /* links styling and when hovered over */
 .options-links {
-    padding: 8px 8px 8px 40px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 14px;
-    color: rgba(52, 58, 64, 1);
-    display: block;
-    transition: 0.3s;
+  padding: 8px 8px 8px 40px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  color: rgba(52, 58, 64, 1);
+  display: block;
+  transition: 0.3s;
 }
 
 .options-links:hover {
-    color: rgba(255, 255, 255, 1);
-    background-color: rgba(32, 201, 151, 1);
+  color: rgba(255, 255, 255, 1);
+  background-color: rgba(32, 201, 151, 1);
 }
 
 /* footer styling*/
 .uFit-footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: rgba(32, 201, 151, 1);
-    color: rgba(255, 255, 255, 1);
-    padding: 20px;
-    text-align: center;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: rgba(32, 201, 151, 1);
+  color: rgba(255, 255, 255, 1);
+  padding: 20px;
+  text-align: center;
 }
 
 .footer-content {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .footer-links {
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-    font-weight: 600;
-    margin: 0 10px;
-    transition: 0.3s;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  font-weight: 600;
+  margin: 0 10px;
+  transition: 0.3s;
 }
 
 .footer-links:hover {
-    color: rgba(255, 255, 255, 1);
+  color: rgba(255, 255, 255, 1);
 }
 
 .footer-copyright {
-    font-size: 12px;
-    font-weight: 400;
-    margin-top: 10px;
+  font-size: 12px;
+  font-weight: 400;
+  margin-top: 10px;
 }
 
 /* login page styling */
 
 .login-body {
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .login-container {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    text-align: center;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  text-align: center;
 }
 
 .username[type="text"],
 .password[type="password"] {
-    width: 93%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  width: 93%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 .submit-btn {
-    width: 100%;
-    padding: 10px;
-    background-color: #2bca92;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+  width: 100%;
+  padding: 10px;
+  background-color: #2bca92;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 .submit-btn:hover {
-    background-color: #218838;
+  background-color: #218838;
 }
 
 .signup {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .signup a {
-    color: #007bff;
-    text-decoration: none;
+  color: #007bff;
+  text-decoration: none;
 }
 
 .signup a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 /* welcome page styling */
 
 .frame {
-    margin-top: -30px;
-    box-sizing: border-box;
-    position: absolute;
-    right: 0;
-    width: 100%;
-    min-height: 100vh;
-    padding: 100px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgb(0, 0, 0);
-    transition: 0.5s;
-    z-index: -1;
+  margin-top: -30px;
+  box-sizing: border-box;
+  position: absolute;
+  right: 0;
+  width: 100%;
+  min-height: 100vh;
+  padding: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgb(0, 0, 0);
+  transition: 0.5s;
+  z-index: -1;
 }
 
 .video-container {
-    box-sizing: border-box;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.8;
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.8;
 }
 
 .uFit-info {
-    box-sizing: border-box;
-    position: relative;
+  box-sizing: border-box;
+  position: relative;
 }
 
 .uFit-info h2 {
-    box-sizing: border-box;
-    font-size: 80px;
-    font-weight: 800;
-    color: rgba(255, 255, 255, 1);
-    line-height: 80px;
-    text-transform: uppercase;
-    margin: 0px;
+  box-sizing: border-box;
+  font-size: 80px;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 1);
+  line-height: 80px;
+  text-transform: uppercase;
+  margin: 0px;
 }
 
 .uFit-info p {
-    box-sizing: border-box;
-    font-size: 20px;
-    color: rgba(255, 255, 255, 1);
-    font-weight: 400;
-    max-width: 700px;
+  box-sizing: border-box;
+  font-size: 20px;
+  color: rgba(255, 255, 255, 1);
+  font-weight: 400;
+  max-width: 700px;
 }
 
 .login-btn {
-    box-sizing: border-box;
-    display: inline-block;
-    font-weight: 500;
-    font-size: 16px;
-    border-radius: 40px;
-    background-color: rgba(32, 201, 151, 1);
-    padding: 10px 30px;
-    text-decoration: none;
-    margin-top: 10px;
-    color: black;
-    transition: 0.5s;
+  box-sizing: border-box;
+  display: inline-block;
+  font-weight: 500;
+  font-size: 16px;
+  border-radius: 40px;
+  background-color: rgba(32, 201, 151, 1);
+  padding: 10px 30px;
+  text-decoration: none;
+  margin-top: 10px;
+  color: black;
+  transition: 0.5s;
 }
 
 .login-btn:hover {
-    box-sizing: border-box;
-    background: rgba(235, 229, 252, 1);
-    color: white;
+  box-sizing: border-box;
+  background: rgba(235, 229, 252, 1);
+  color: white;
 }
 
 /* chat page styling */
 .chatpage-options {
-    display: flex;
+  display: flex;
+}
+
+body > div.uFit-nav > div.chatpage-btn i {
+  text-decoration: none;
+  color: rgba(32, 201, 151, 1);
+  margin-right: 15px;
 }
 
 .chatpage-body {
-    background-color: rgba(255, 255, 255, 1);
-    margin: 0;
-    padding: 0;
+  background-color: rgba(255, 255, 255, 1);
+  margin: 0;
+  padding: 0;
 }
 
 .chatpage-greeting {
-    color: rgb(228, 17, 17);
-    font-size: 14px;
-    text-align: center;
+  color: rgb(228, 17, 17);
+  font-size: 14px;
+  text-align: center;
 }
 
 .chatpage-container {
-    max-width: 60%;
-    margin: auto;
+  max-width: 60%;
+  margin: auto;
 }
 
 .messages {
-    background: rgba(255, 255, 255, 1);
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 30px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    font-size: 16px;
-    height: 50vh;
-    overflow-y: scroll;
+  background: rgba(255, 255, 255, 1);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  height: 50vh;
+  overflow-y: scroll;
 }
 
 .message-form {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .send-button {
-    margin-bottom: 15px;
-    padding: 15px;
-    border: 1px solid;
-    border-radius: 6px;
-    font-size: 16px;
-    background-color: rgba(32, 201, 151, 1);
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  margin-bottom: 15px;
+  padding: 15px;
+  border: 1px solid;
+  border-radius: 6px;
+  font-size: 16px;
+  background-color: rgba(32, 201, 151, 1);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 /* .send-button:hover {
@@ -376,120 +402,178 @@ button:focus {
 } */
 
 .message-author {
-    font-weight: bold;
-    margin-bottom: 5px;
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 
 .message-content {
-    font-size: 16px;
-    line-height: 1.4;
+  font-size: 16px;
+  line-height: 1.4;
 }
 
 .message-box {
-    background: white;
-    border-left: 4px solid;
-    margin-bottom: 15px;
-    padding: 10px 15px;
-    border-radius: 6px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background: #f8f9fa;
-    border: 1px solid lightgray;
-    box-sizing: border-box;
-    width: 100%;
-    padding: 12px 20px;
-    border-radius: 6px;
-    min-height: 100px;
-    font-size: 16px;
-    line-height: 1.5;
-    resize: none;
-    outline: none;
+  background: white;
+  border-left: 4px solid;
+  margin-bottom: 15px;
+  padding: 10px 15px;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: #f8f9fa;
+  border: 1px solid lightgray;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 12px 20px;
+  border-radius: 6px;
+  min-height: 100px;
+  font-size: 16px;
+  line-height: 1.5;
+  resize: none;
+  outline: none;
 }
 
 [x-cloak] {
-    display: none !important;
+  display: none !important;
+}
+
+.lobby-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #e8eff1;
+  margin: 0;
+  color: #333;
+}
+
+.sign-in-container {
+  background: #ffffff;
+  padding: 40px 50px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 300px;
+}
+
+.sign-in-container h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 24px;
+  color: #0a3d62;
+}
+
+.sign-in-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.sign-in-container input {
+  margin-bottom: 15px;
+  padding: 15px;
+  border: 1px solid #ced6e0;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.sign-in-container button {
+  padding: 15px;
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.sign-in-container button:hover {
+  background-color: #27ae60;
 }
 
 /* Home Page Layout Styles */
 /* Content Area */
 .container {
-    flex-grow: 1; /* Make sure this area grows to fill space */
-    padding: 20px;
-    background-color: #f4f4f4;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap; /* Allow content to wrap on small screens */
+  flex-grow: 1; /* Make sure this area grows to fill space */
+  padding: 20px;
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap; /* Allow content to wrap on small screens */
 }
 
 /* Feed Section */
 .feed {
-    flex: 2;
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-right: 20px;
+  flex: 2;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-right: 20px;
 }
 
 .feed h2 {
-    margin-bottom: 20px;
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-    display: inline;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  display: inline-block;
+  vertical-align: top;
 }
 
 .post {
-    padding: 15px;
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+  padding: 15px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
 }
 
 /* Events Section */
 .events {
-    flex: 1;
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .events h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 24px;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
 }
 
 .day {
-    background-color: #f1f1f1;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 10px;
+  background-color: #f1f1f1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
 }
 
 .day h3 {
-    margin: 0;
-    font-weight: bold;
-    font-size: 16px;
+  margin: 0;
+  font-weight: bold;
+  font-size: 16px;
 }
 .searchBar {
-    text-align: center;
-    margin-bottom: 20px;
-    margin-left: auto;
-    position: relative;
-    display: inline-block;
+  text-align: center;
+  margin-left: auto;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 10px 10px;
 }
 .searchBar input {
-    width: 300px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+  width: 300px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
 a.post-icon{
     position: absolute;
-    top: 0px;
+    top: 30%;
+    right: 5%;
+    width: 15px;
+    height: 15px;
 }
