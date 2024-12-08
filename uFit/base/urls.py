@@ -20,12 +20,13 @@ urlpatterns = [
         "stream-chat-messages/", views.stream_chat_messages, name="stream-chat-messages"
     ),
     path("lobby/", views.lobby, name="lobby"),
-    path("update-post/<str:pk>", views.updatePost, name="update-post"),
+    path("update-post/<str:pk>", views.updatePost, name="updatepost"),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
     path("update-post/<int:pk>/", views.updatePost, name="update-post"),
     path("search-posts/", views.search_posts, name="search-posts"),
     path("home/profilepage/<str:pk>", views.profilepage, name="profilepage"),
-    path("update-profile/", views.update_profile, name="update-profile"),
+    path("update-profile/<int:pk>", views.update_profile, name="update-profile"),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

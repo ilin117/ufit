@@ -112,7 +112,7 @@
             <h2>{{ user.username }}</h2>
         
             <div class="action-buttons">
-                <a href="{% url 'update-profile' %}" class="edit-button">Edit Profile</a>
+                <a href="{% url 'update-profile' user.id %}" class="edit-button">Edit Profile</a>
                 <a href="{% url 'postpage' %}" class="createpost-button">Create Post</a>
             </div>
         

@@ -3,7 +3,7 @@ from typing import AsyncGenerator
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Post, Profile
 from .forms import PostForm, ProfileForm
-from django.http import HttpRequest, StreamingHttpResponse, HttpResponse, JsonResponse, HttpResponseRedirect
+from django.http import Http404, HttpRequest, StreamingHttpResponse, HttpResponse, JsonResponse, HttpResponseRedirect
 from . import models
 import asyncio
 import json
@@ -54,7 +54,7 @@ def lobby(request: HttpRequest) -> HttpResponse:
                 f"{random.choice(names)}-{hash(datetime.now().timestamp())}"
             )
 
-        return redirect("home")
+        return redirect("chatpage")
     else:
         return render(request, "base/lobby.html")
 
@@ -248,20 +248,34 @@ def updatePost(request, pk):
             return HttpResponseRedirect("/home/")  # Redirect to the home page
     else:
         form = PostForm(instance=post)
-    return render(request, "update_post.html", {"form": form})
+    return render(request, "base/updatepost.html", {"form": form})
 
 @login_required
-def update_profile(request):
+def update_profile(request, pk):
+    # Ensure the user exists
+    try:
+        user = User.objects.get(pk=pk)
+    except User.DoesNotExist:
+        raise Http404("User does not exist")
+
+    # Ensure the user is the same as the current user or is an admin
+    if user != request.user and not request.user.is_staff:
+        raise Http404("You do not have permission to update this user's profile")
+
     # Ensure the profile exists
-    profile, created = Profile.objects.get_or_create(user=request.user)
+    try:
+        profile, created = Profile.objects.get_or_create(user=user)
+    except User.DoesNotExist:
+        raise Http404("User does not have a profile")
 
     if request.method == "POST":
         form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
             return redirect("profilepage", pk=request.user.pk)
+
     else:
         form = ProfileForm(instance=profile)
 
     return render(request, "base/update-profile.html", {"form": form})
-
+   

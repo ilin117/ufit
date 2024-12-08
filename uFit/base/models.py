@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.contrib.auth.models import AbstractUser
+from django.utils.timezone import now
 
 # from django.contrib.auth.models import AbstractUser
 # from django.utils.timezone import now
@@ -34,7 +36,6 @@ class Post(models.Model):
 
 
 class Profile(models.Model):
-    id = models.AutoField(primary_key=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     bio = models.TextField(max_length=500, blank=True, default="This is your bio.")
     profile_image = models.ImageField(upload_to="profile_pics/", default="profile_pics/default.jpg")
