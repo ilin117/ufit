@@ -8,3 +8,5 @@ admin.site.register(Post)
 admin.site.register(Profile)
 admin.site.register(Author)
 admin.site.register(Message)
+
+

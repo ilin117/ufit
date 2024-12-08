@@ -8,6 +8,12 @@ from django.dispatch import receiver
 # Create your models here.
 
 # Create your models here.
+ROLE_CHOICES = [
+    ('Student', 'Student'),
+    ('Trainer', 'Trainer'),
+    ('Wellness Organization', 'Wellness Organization')
+]
+
 class Post(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=200)
@@ -26,10 +32,13 @@ class Post(models.Model):
         return self.title
 
 
+
 class Profile(models.Model):
+    id = models.AutoField(primary_key=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     bio = models.TextField(max_length=500, blank=True, default="This is your bio.")
     profile_image = models.ImageField(upload_to="profile_pics/", default="profile_pics/default.jpg")
+
 
     def __str__(self):
         return f"{self.user.username}'s Profile"
@@ -54,3 +63,4 @@ class Message(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+

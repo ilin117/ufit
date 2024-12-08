@@ -1,4 +1,5 @@
 from typing import AsyncGenerator
+
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Post, Profile
 from .forms import PostForm, ProfileForm
@@ -16,8 +17,8 @@ from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q
-
-from django.db.models import Q
+from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.models import User
 """ from .models import Post
  """
 # Create your views here.
@@ -149,13 +150,35 @@ def homePage(request):
     context = {"posts": posts}
     return render(request, "base/home.html", context)
 
+# uFit/base/views.py
 
+from django.shortcuts import render, redirect
+from .models import Post
+from django.contrib.auth.decorators import login_required
+
+@login_required
 def postpage(request):
-    return render(request, "base/postpage.html")
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        print(form.is_valid)
+        if form.is_valid():
+            print("FOrm is vaLIDDD")
+            post = form.save(commit=False)
+            post.host = request.user
+            post.created = datetime.now()
+            post.save()
+            return redirect('home')
+    else:
+        print("thfiaohefhaofo")
+        form = PostForm()
+    context = {"form" : form}
+    return render(request, 'base/postpage.html', context)
 
-
-def profilepage(request):
-    return render(request, "base/profilepage.html")
+def profilepage(request, pk):
+    user = get_object_or_404(User, pk=pk)
+    posts = Post.objects.filter(host=user)
+    context = {"user": user, "posts": posts}
+    return render(request, "base/profilepage.html", context)
 
 
 def login_page(request):
@@ -215,6 +238,7 @@ def search_posts(request):
 
     return JsonResponse(list(posts), safe=False)
 
+
 def updatePost(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
@@ -240,3 +264,4 @@ def update_profile(request):
         form = ProfileForm(instance=profile)
 
     return render(request, "base/update-profile.html", {"form": form})
+
