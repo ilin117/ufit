@@ -248,12 +248,20 @@ def updatePost(request, pk):
             return HttpResponseRedirect("/home/")  # Redirect to the home page
     else:
         form = PostForm(instance=post)
-    return render(request, "update_post.html", {"form": form})
+    return render(request, "base/updatepost.html", {"form": form})
 
 @login_required
-def update_profile(request):
+def update_profile(request, pk):
+    
+    # Ensure the user exists
+    if not request.user.is_authenticated:
+        return redirect("loginpage")
+
     # Ensure the profile exists
-    profile, created = Profile.objects.get_or_create(user=request.user)
+    try:
+        profile, created = Profile.objects.get_or_create(user=request.user)
+    except User.DoesNotExist:
+        return redirect("loginpage")
 
     if request.method == "POST":
         form = ProfileForm(request.POST, request.FILES, instance=profile)
@@ -264,4 +272,3 @@ def update_profile(request):
         form = ProfileForm(instance=profile)
 
     return render(request, "base/update-profile.html", {"form": form})
-
