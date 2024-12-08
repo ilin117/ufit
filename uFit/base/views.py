@@ -279,3 +279,4 @@ def update_profile(request, pk):
 
     return render(request, "base/update-profile.html", {"form": form})
    
+   
