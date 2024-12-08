@@ -240,3 +240,20 @@ def profile_page(request):
 
     posts = request.user.posts.all()
     return render(request, 'profilepage.html', {'user': request.user, 'posts': posts})
+
+@login_required
+def updatePost(request, post_id):
+    post = get_object_or_404(Post, id=post_id, host=request.user)
+
+    if request.method == 'POST':
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Post updated successfully!")
+            return redirect('postpage')
+        else:
+            messages.error(request, "There was an error updating your post.")
+    else:
+        form = PostForm(instance=post)
+
+    return render(request, 'base/updatepost.html', {'form': form, 'post': post})
