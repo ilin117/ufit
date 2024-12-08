@@ -16,10 +16,7 @@
         <!-- Feed Section -->
         <div class="feed">
             <h2>Your Feed</h2>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 366c1ab3 (Search.)
+
             <div class="searchBar"><form class="header__search" action="{% url 'home' %}" method="GET">
                 <label>
                   <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
@@ -31,8 +28,7 @@
                   <input name="q" placeholder="Search for posts" />
                 </label>
               </form></div>
-<<<<<<< HEAD
-=======
+
             {% csrf_token %}
             {% for post in posts %}
             <div class = "post">
@@ -40,27 +36,20 @@
                 <h3>{{ post.host }}</h3>
             </div>
             {% endfor %}
->>>>>>> main
-=======
->>>>>>> 366c1ab3 (Search.)
+
             <div class="post">
-                <h3>@user_profile</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ultricies neque non velit interdum pulvinar quis id orci. Ut lacus ex, malesuada sit amet sem eu, ultricies ultricies turpis. Vestibulum at lorem vestibulum, placerat metus placerat, suscipit lectus. Nunc eget magna nec ipsum interdum suscipit ac ac lorem. Donec in est ornare, 
-                    condimentum enim quis, mollis lacus. Quisque ut malesuada tortor, eu fermentum quam. Etiam egestas dictum ornare. Pellentesque molestie interdum tellus a porttitor.</p>
+                <h3>@rachelbrooks</h3>
+                <p>Just completed an amazing workout focusing on endurance and flexibility. 
+                    My goal this week is to improve my core strength and stay consistent with my weightlifting routine. Feeling motivated! Let’s keep pushing!</p>
             </div>
             <div class="post">
-                <h3>@user_profile</h3>
-                <p>Quisque efficitur, metus ac hendrerit dapibus, ipsum enim vehicula ligula, vel volutpat lectus.</p>
+                <h3>@james12booker</h3>
+                <p>Upped my deadlift PR by 20 lbs today! Consistency is key. Looking forward to smashing more goals this month!</p>
             </div>
             <div class="post">
-                <h3>@user_profile</h3>
-                <p>Nullam ante erat, consectetur at egestas eget, aliquam non erat. Sed varius erat 
-                    sed neque efficitur auctor. Orci varius natoque penatibus et magnis dis parturient montes, 
-                    nascetur ridiculus mus. Donec lacus sapien, convallis et velit vel, facilisis pulvinar lacus. 
-                    Cras tellus massa, vehicula in diam quis, posuere maximus sapien. Curabitur sit amet ornare elit, 
-                    in vestibulum orci. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos 
-                    himenaeos. Pellentesque et ex hendrerit sem lacinia pretium. Vivamus imperdiet ex sed porta posuere. 
-                    Donec nec libero ac mauris condimentum fringilla. Sed ullamcorper sit amet nisi sed dictum. 
+                <h3>@coach_tien</h3>
+                <p>Helping clients crush their fitness goals this week! Remember, consistency beats intensity. Focus on form and stay committed to your routine. This week’s tip: Incorporate compound exercises like squats and deadlifts for maximum results. 
+                    Let's stay disciplined and keep pushing toward greatness! 💥🔥 #TrainHard #StayStrong #PersonalTrainerTips 
                 </p>
             </div>
             <!-- Add more posts as needed -->
@@ -79,7 +68,8 @@
             </div>
             <div class="day">
                 <h3>Wednesday</h3>
-                <p>Group run at 7:00 AM.</p>
+                <p>Group run at 7:00 AM. </p>
+                <p>Outdoor Cycling Ride at 12:00 PM.</p>
             </div>
             <div class="day">
                 <h3>Thursday</h3>
