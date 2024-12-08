@@ -134,12 +134,14 @@ a post button
 <body>
     <div class="container">
         <div class="editor">
+
             <form class="post-form" method="POST">
                 {% csrf_token %}
 
               <h2>Create a new post</h2>
               {{ form.as_p}}
               <button type="submit">Create post</button>
+
             </form>
         </div>
             {% for post in post %}

@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -135,3 +135,6 @@ ASGI_APPLICATION = "uFit.asgi.application"
 
 LOGIN_REDIRECT_URL = "base/home"  # Redirect to home page after login
 LOGOUT_REDIRECT_URL = "base/loginpage"  # Redirect to login page after
+
+MEDIA_URL = '/media/'  # URL path to access media files
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Directory to store media files

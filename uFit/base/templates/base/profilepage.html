@@ -2,154 +2,146 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
     <style>
-      .profile-container {
-        margin: 20px auto;
-        text-align: center;
-        width: 80%;
-        max-width: 600px;
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      }
-
-      .profile-image {
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-        border: 2px solid #ccc;
-        object-fit: cover;
-        cursor: pointer;
-      }
-      .edit-button {
-        display: inline-block;
-        margin-top: 10px;
-        padding: 10px 20px;
-        background-color: #2bca92;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-      }
-      .createpost-button {
-        display: inline-block;
-        margin-top: 10px;
-        padding: 10px 20px;
-        background-color: #2bca92;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-      }
-      .edit-button:hover {
-        background-color: #218838;
-      }
-      .createpost-button:hover {
-        background-color: #218838;
-      }
-      .description {
-        margin-top: 15px;
-        padding: 10px;
-        background-color: #f4e3ff;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-      }
-      .posts-container {
-        margin: 20px auto;
-        width: 80%;
-        max-width: 600px;
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      }
-      .post {
-        background-color: #fff;
-        margin-bottom: 20px;
-        padding: 15px;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      }
-      .post-header {
-        background-color: #2bca92;
-        color: white;
-        padding: 10px;
-        border-top-left-radius: 8px;
-        border-top-right-radius: 8px;
-        font-weight: bold;
-      }
-      .post-content {
-        padding: 15px;
-      }
-      .post img {
-        width: 100%;
-        border-radius: 5px;
-        margin-top: 10px;
-      }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .profile-container {
+            margin-top: 20px;
+            text-align: center;
+            width: 80%;
+            max-width: 600px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 2px solid #ccc;
+            object-fit: cover;
+            cursor: pointer;
+        }
+        .edit-button {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #2bca92;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .createpost-button {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #2bca92;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .edit-button:hover {
+            background-color: #218838;
+        }
+        .createpost-button:hover {
+            background-color: #218838;
+        }
+        .description {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #f4e3ff;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .posts-container {
+            margin-top: 20px;
+            width: 80%;
+            max-width: 600px;
+        }
+        .post {
+            background-color: #fff;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .post-header {
+            background-color: #2bca92;
+            color: white;
+            padding: 10px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            font-weight: bold;
+        }
+        .post-content {
+            padding: 15px;
+        }
+        .post img {
+            width: 100%;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
     </style>
-  </head>
-  {% include 'navbar.html' %}
-  <body>
+</head>
+<body>
+    {% include 'navbar.html' %}
+
     <div class="profile-container">
-      <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <input
-          type="file"
-          id="profileImageInput"
-          style="display: none"
-          accept="image/*"
-          onchange="loadProfileImage(event)"
-        />
-        <label for="profileImageInput">
-          <img
-            src="{{ user.profile.profile_image.url|default:'https://via.placeholder.com/150' }}"
-            alt="User Profile"
-            class="profile-image"
-            id="profileImage"
-          />
-        </label>
-        <h2>{{ user.username }}</h2>
-
-        <div class="action-buttons">
-          <button type="submit" class="edit-button">Edit</button>
-          <a href="{% url 'postpage' %}" class="createpost-button"
-            >Create Post</a
-          >
-        </div>
-
-        <div class="description">
-          <p>{{ user.profile.bio|default:"No bio provided." }}</p>
-        </div>
-      </form>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="profileImageInput">
+                <img src="{{ user.profile.profile_image.url|default:'https://via.placeholder.com/150' }}" alt="User Profile" class="profile-image" id="profileImage">
+            </label>
+            <h2>{{ user.username }}</h2>
+        
+            <div class="action-buttons">
+                <a href="{% url 'update-profile' %}" class="edit-button">Edit Profile</a>
+                <a href="{% url 'postpage' %}" class="createpost-button">Create Post</a>
+            </div>
+        
+            <div class="description">
+                <p>{{ user.profile.bio|default:"Update your bio by clicking the Edit Profile button." }}</p>
+            </div>
+        </form>
     </div>
 
     <div class="posts-container">
-      {% for post in posts %}
-      <div class="post">
-        <div class="post-header">@{{ post.host.username }}</div>
-        <div class="post-content">
-          <p>{{ post.body }}</p>
-          {% if post.image %}
-          <img src="{{ post.image.url }}" alt="Post Image" />
-          {% endif %}
+        {% for post in posts %}
+        <div class="post">
+            <div class="post-header">@{{ post.host.username }}</div>
+            <div class="post-content">
+                <p>{{ post.body }}</p>
+                {% if post.image %}
+                <img src="{{ post.image.url }}" alt="Post Image">
+                {% endif %}
+            </div>
         </div>
-      </div>
-      {% endfor %}
+        {% endfor %}
     </div>
 
     <script>
-      function loadProfileImage(event) {
-        const image = document.getElementById("profileImage");
-        image.src = URL.createObjectURL(event.target.files[0]);
-      }
+        function loadProfileImage(event) {
+            const image = document.getElementById('profileImage');
+            image.src = URL.createObjectURL(event.target.files[0]);
+        }
     </script>
     {% include 'footer.html' %}
-  </body>
+</body>
 </html>

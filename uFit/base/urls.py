@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path("", views.welcomePage, name="hello"),
@@ -20,5 +22,9 @@ urlpatterns = [
     path("lobby/", views.lobby, name="lobby"),
     path("update-post/<str:pk>", views.updatePost, name="update-post"),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
+    path("update-post/<int:pk>/", views.updatePost, name="update-post"),
     path("search-posts/", views.search_posts, name="search-posts"),
+    path("update-profile/", views.update_profile, name="update-profile"),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,8 +1,9 @@
 from typing import AsyncGenerator
-from django.shortcuts import render, redirect
-from .models import Post
-from .forms import PostForm, ProfileUpdateForm
-from django.http import HttpRequest, StreamingHttpResponse, HttpResponse, JsonResponse
+
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Post, Profile
+from .forms import PostForm, ProfileForm
+from django.http import HttpRequest, StreamingHttpResponse, HttpResponse, JsonResponse, HttpResponseRedirect
 from . import models
 import asyncio
 import json
@@ -237,33 +238,30 @@ def search_posts(request):
 
     return JsonResponse(list(posts), safe=False)
 
-@login_required
-def profile_page(request, pk):
-    user = get_object_or_404(User, pk=pk)
-    if request.method == 'POST':
-        profile = request.user.profile
-        profile.bio = request.POST['bio']
-        if 'profile_image' in request.FILES:
-            profile.profile_image = request.FILES['profile_image']
-        profile.save()
-        return redirect('profile_page')
 
-    posts = request.user.posts.all()
-    return render(request, 'profilepage.html', {'user': request.user, 'posts': posts})
-
-@login_required
 def updatePost(request, pk):
-    post = get_object_or_404(Post, id=pk, host=request.user)
-
-    if request.method == 'POST':
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == "POST":
         form = PostForm(request.POST, instance=post)
         if form.is_valid():
             form.save()
-            messages.success(request, "Post updated successfully!")
-            return redirect('home')
-        else:
-            messages.error(request, "There was an error updating your post.")
+            return HttpResponseRedirect("/home/")  # Redirect to the home page
     else:
         form = PostForm(instance=post)
+    return render(request, "update_post.html", {"form": form})
 
-    return render(request, 'base/updatepost.html', {'form': form, 'post': post})
+@login_required
+def update_profile(request):
+    # Ensure the profile exists
+    profile, created = Profile.objects.get_or_create(user=request.user)
+
+    if request.method == "POST":
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect("profilepage")
+    else:
+        form = ProfileForm(instance=profile)
+
+    return render(request, "base/update-profile.html", {"form": form})
+

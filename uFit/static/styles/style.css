@@ -27,6 +27,19 @@
     paint-order: stroke fill;
 }
 
+#uFit-nav a #uFit-logo{
+    letter-spacing: 2px;
+    margin-left: auto;
+    margin-right: auto;
+    color: rgba(32, 201, 151, 1);
+    font-weight: bold;
+    font-style: italic;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: rgba(0, 0, 0, 1);
+    paint-order: stroke fill;
+    text-decoration: none;
+}
+
 /* makes it so that the buttons doesn't look buttony??? */
 button {
     all: unset;
@@ -475,28 +488,8 @@ button:focus {
     border: 1px solid #ccc;
     border-radius: 5px;
 }
-.searchBar svg {
+
+a.post-icon{
     position: absolute;
-    top: 30%;
-    right: 5%;
-    width: 15px;
-    height: 15px;
+    top: 0px;
 }
-
-/* Post Icon Styling */
-.post-icon {
-    margin-left: 50px; /* Space between the search bar and icon */
-    width: 32px;
-    height: 32px;
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-    vertical-align: middle; /* Align with search bar */
-    transition: color 0.3s ease, transform 0.2s ease;
-}
-
-.post-icon:hover {
-    color: rgba(32, 201, 151, 1); /* uFit primary color */
-    transform: scale(1.1); /* Subtle zoom effect */
-}
-
