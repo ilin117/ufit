@@ -1,7 +1,7 @@
 from typing import AsyncGenerator
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Post
-from .forms import PostForm
+from .models import Post, Profile
+from .forms import PostForm, ProfileForm
 from django.http import HttpRequest, StreamingHttpResponse, HttpResponse, JsonResponse, HttpResponseRedirect
 from . import models
 import asyncio
@@ -225,3 +225,18 @@ def updatePost(request, pk):
     else:
         form = PostForm(instance=post)
     return render(request, "update_post.html", {"form": form})
+
+@login_required
+def update_profile(request):
+    # Ensure the profile exists
+    profile, created = Profile.objects.get_or_create(user=request.user)
+
+    if request.method == "POST":
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect("profilepage")
+    else:
+        form = ProfileForm(instance=profile)
+
+    return render(request, "base/update-profile.html", {"form": form})

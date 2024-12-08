@@ -105,19 +105,18 @@
     <div class="profile-container">
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            <input type="file" id="profileImageInput" style="display: none;" accept="image/*" onchange="loadProfileImage(event)">
             <label for="profileImageInput">
                 <img src="{{ user.profile.profile_image.url|default:'https://via.placeholder.com/150' }}" alt="User Profile" class="profile-image" id="profileImage">
             </label>
             <h2>{{ user.username }}</h2>
-
+        
             <div class="action-buttons">
-                <button type="submit" class="edit-button">Edit</button>
+                <a href="{% url 'update-profile' %}" class="edit-button">Edit Profile</a>
                 <a href="{% url 'postpage' %}" class="createpost-button">Create Post</a>
             </div>
-                        
+        
             <div class="description">
-                <p>{{ user.profile.bio|default:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. This is a short description that the user can input." }}</p>
+                <p>{{ user.profile.bio|default:"Update your bio by clicking the Edit Profile button." }}</p>
             </div>
         </form>
     </div>
