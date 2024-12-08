@@ -11,7 +11,7 @@ class PostForm(ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['bio', 'profile_image']        
+        fields = ['bio', 'profile_image', 'role']        
 
 
 class ProfileUpdateForm(forms.ModelForm):
