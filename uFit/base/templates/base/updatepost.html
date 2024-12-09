@@ -1,55 +1,99 @@
-{% extends 'main.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Post</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
 
-{% block content %}
-<div class="update-post-container">
-    <h2>Update Post</h2>
-    
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="update-button">Update</button>
-    </form>
-</div>
-
-<style>
-    body {
+        body {
             font-family: "Inter", sans-serif;
-            background-color: #a98eda;
+            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
+            height: 100vh;
         }
-         h2 {
-            font-family: "Inter", sans-serif;
-            margin-bottom: 20px;
-            color: #2bca92;
+
+        .form-container {
+            max-width: 600px;
+            width: 100%;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             text-align: center;
-            
         }
-    .update-post-container {
-        max-width: 600px;
-        margin: 50px auto;
-        padding: 20px;
-        background-color: white;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    .update-button {
-        margin-top: 10px;
-        padding: 10px 20px;
-        background-color: rgba(32, 201, 151, 1);
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
-    .update-button:hover {
-        background-color: rgba(24, 155, 116, 1);
-    }
-</style>
 
-{% endblock content %}
+        .form-container h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #2bca92;
+            margin-bottom: 20px;
+        }
 
+        .form-field {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .form-field label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-field input,
+        .form-field textarea {
+            width: 95%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form-field textarea {
+            resize: vertical;
+            height: 100px;
+        }
+
+        .button-container {
+            margin-top: 20px;
+            text-align: right;
+        }
+
+        .submit-button {
+            padding: 10px 20px;
+            background-color: rgba(32, 201, 151, 1);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .submit-button:hover {
+            background-color: rgba(24, 155, 116, 1);
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Update Post</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-field">
+                {{ form.as_p }}
+            </div>
+            <div class="button-container">
+                <button type="submit" class="submit-button">Update</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
