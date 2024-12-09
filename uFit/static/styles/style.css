@@ -587,6 +587,7 @@ svg.post-icon{
 
 }
 
+
 .user-pic{
     width: 40px;
     height: 40px;
@@ -616,3 +617,4 @@ body::-webkit-scrollbar-track {
   background-color: #4b4b4b;
   border-radius: 10px;
 }
+

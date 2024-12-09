@@ -40,15 +40,18 @@
         <!-- Events Section -->
         <div class="events">
             <h2>Events</h2>
-            <div class="day"><h3>Monday</h3><p>No events today.</p></div>
-            <div class="day"><h3>Tuesday</h3><p>Yoga class at 6:00 PM.</p></div>
-            <div class="day"><h3>Wednesday</h3><p>Group run at 7:00 AM.</p><p>Outdoor Cycling Ride at 12:00 PM.</p></div>
-            <div class="day"><h3>Thursday</h3><p>Nutrition workshop at 12:00 PM.</p></div>
-            <div class="day"><h3>Friday</h3><p>Lift workout at 2:00 PM.</p><p>Pilates class at 6:30 PM.</p></div>
-            <div class="day"><h3>Saturday</h3><p>Weekend hike at 8:00 AM.</p></div>
-            <div class="day"><h3>Sunday</h3><p>Rest day - No events.</p></div>
+            <a href="{% url 'add-event' %}">Add Event</a>
+            {% for event in events %}
+            <div class="day">
+                <h3>{{ event.date|date:"l, F j, Y" }}</h3>
+                <p><strong>{{ event.title }}</strong> at {{ event.time|time:"P" }}</p>
+                <p>{{ event.description }}</p>
+                <p>Posted by: <a href="{% url 'profilepage' event.created_by.id %}">{{ event.created_by.username }}</a></p>
+            </div>
+            {% empty %}
+            <p>No upcoming events.</p>
+            {% endfor %}
         </div>
-    </div>
 
     {% include 'footer.html' %}
 

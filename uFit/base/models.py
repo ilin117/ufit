@@ -40,6 +40,7 @@ class Profile(models.Model):
     bio = models.TextField(max_length=500, blank=True, default="This is your bio.")
     role = models.CharField(max_length=50, choices=ROLE_CHOICES, default='Student')
     profile_image = models.ImageField(upload_to="profile_pics/", default="profile_pics/default.jpg")
+    role = models.CharField(max_length=50, choices=ROLE_CHOICES, default='Student')  # New field
 
 
     def __str__(self):
@@ -66,3 +67,12 @@ class Message(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
+class Event(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    date = models.DateField()
+    time = models.TimeField()
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name="events")
+    
+    def __str__(self):
+        return self.title

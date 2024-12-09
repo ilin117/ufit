@@ -1,6 +1,6 @@
 
 {% block content %}
-{% if posts.exists %}
+{% if posts %}
                 {% for post in posts %}
                 <div class="post">
 <img src="{{ post.host.profile.profile_image.url|default:'https://via.placeholder.com/50' }}" alt="{{ post.host.username }}'s Profile Image" class="post-host-image" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 10px;">
@@ -31,6 +31,7 @@
                     <p>{{ post.body }}</p>
                     {% if request.user == post.host %}
                     <a href="{% url 'update-post' post.id %}">Edit</a>
+                    <a href="{% url 'delete-post' post.id %}">Delete</a>
                     {% endif %}
                 </div>
                 {% endfor %}
