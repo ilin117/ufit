@@ -5,72 +5,117 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Profile</title>
     <style>
+        @import url("https://fonts.googleapis.com/css2?family=Bungee+Tint&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
         body {
             font-family: "Inter", sans-serif;
-            background-color: #a98eda;
+            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
+            height: 100vh;
         }
+
         .form-container {
             font-family: "Inter", sans-serif;
-            margin-top: 50px;
-            text-align: center;
-            width: 80%;
-            max-width: 600px;
-            background-color: #ffffff;
+            background-color: white;
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 400px;
         }
+
         .form-container h1 {
             font-family: "Inter", sans-serif;
-            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: bold;
             color: #2bca92;
+            margin-bottom: 20px;
         }
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        form .form-field {
+
+        .form-field {
+            font-family: "Inter", sans-serif;
             margin-bottom: 15px;
-            width: 100%;
+            text-align: left;
         }
-        form .form-field label {
+
+        .form-field label {
+            font-family: "Inter", sans-serif;
             display: block;
             margin-bottom: 5px;
             font-weight: bold;
             color: #333;
         }
-        form .form-field input,
-        form .form-field textarea {
+
+        .form-field input,
+        .form-field textarea,
+        .form-field select {
             width: 100%;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
             font-size: 16px;
         }
-        form .form-field textarea {
+
+        .form-field textarea {
             resize: vertical;
             height: 100px;
         }
-        .submit-button {
-            font-family: "Inter", sans-serif;
-            font-weight: bold;
+
+        .profile-image-preview {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-image-preview img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+            border: 2px solid #ccc;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
             margin-top: 20px;
+        }
+
+        .submit-button {
             padding: 10px 20px;
             background-color: #2bca92;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-weight: bold;
             transition: background-color 0.3s;
         }
+
         .submit-button:hover {
             background-color: #218838;
+        }
+
+        .cancel-button {
+            padding: 10px 20px;
+            background-color: #e0e0e0;
+            color: #333;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .cancel-button:hover {
+            background-color: #c0c0c0;
         }
     </style>
 </head>
@@ -79,8 +124,35 @@
         <h1>Update Profile</h1>
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="submit-button">Save Changes</button>
+            
+            <!-- Profile Image -->
+            <div class="profile-image-preview">
+                <label for="id_profile_image">
+                    <img src="{{ user.profile.profile_image.url|default:'https://via.placeholder.com/100' }}" alt="Profile Picture">
+                </label>
+                <input type="file" name="profile_image" id="id_profile_image">
+            </div>
+
+            <!-- Bio Section -->
+            <div class="form-field">
+                <label for="id_bio">Bio</label>
+                <textarea name="bio" id="id_bio">{{ user.profile.bio }}</textarea>
+            </div>
+
+            <!-- Role Dropdown -->
+            <div class="form-field">
+                <label for="id_role">Role</label>
+                <select name="role" id="id_role">
+                    <option value="Student" {% if user.profile.role == "Student" %}selected{% endif %}>Student</option>
+                    <option value="Trainer" {% if user.profile.role == "Trainer" %}selected{% endif %}>Trainer</option>
+                    <option value="Wellness Organization" {% if user.profile.role == "Wellness Organization" %}selected{% endif %}>Wellness Organization</option>
+                </select>
+            </div>
+
+            <div class="button-container">
+                <button type="submit" class="submit-button">Save Changes</button>
+                <a href="{% url 'profilepage' user.id %}" class="cancel-button">Cancel</a>
+            </div>
         </form>
     </div>
 </body>
