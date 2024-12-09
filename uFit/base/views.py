@@ -293,6 +293,7 @@ def update_profile(request, pk):
 
     return render(request, "base/update-profile.html", {"form": form})
    
+
 @login_required
 def add_event(request):
     if request.method == 'POST':
@@ -306,3 +307,4 @@ def add_event(request):
         form = EventForm()
 
     return render(request, 'base/add_event.html', {'form': form})
+

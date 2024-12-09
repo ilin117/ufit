@@ -38,6 +38,7 @@ class Post(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     bio = models.TextField(max_length=500, blank=True, default="This is your bio.")
+    role = models.CharField(max_length=50, choices=ROLE_CHOICES, default='Student')
     profile_image = models.ImageField(upload_to="profile_pics/", default="profile_pics/default.jpg")
     role = models.CharField(max_length=50, choices=ROLE_CHOICES, default='Student')  # New field
 

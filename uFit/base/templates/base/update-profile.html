@@ -1,5 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+
+{% block content %}
+{% load static %}   
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -116,6 +118,7 @@
     </style>
 </head>
 <body>
+    {% include 'navbar.html' %}
     <div class="form-container">
         <h1>Update Profile</h1>
         <form method="POST" enctype="multipart/form-data">
@@ -152,4 +155,5 @@
         </form>
     </div>
 </body>
-</html>
+
+{% endblock content %}
