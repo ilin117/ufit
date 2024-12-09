@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Add Event</title>
+    <title>Delete Post</title>
     <style>
         body {
             font-family: "Inter", sans-serif;
@@ -30,25 +30,10 @@
             margin-bottom: 20px;
         }
 
-        .form-field {
-            margin-bottom: 15px;
-            text-align: left;
-        }
-
-        .form-field label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .form-field input,
-        .form-field textarea {
-            width: 95%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+        .form-container p {
             font-size: 16px;
+            color: #555;
+            margin-bottom: 20px;
         }
 
         .button-container {
@@ -90,27 +75,14 @@
 </head>
 <body>
     <div class="form-container">
-        <h1>Add Event</h1>
+        <h1>Delete Post</h1>
+        <p>Are you sure you want to delete this post?</p>
+        <p><strong>{{ post.title }}</strong></p>
+        <p>{{ post.body }}</p>
         <form method="POST">
             {% csrf_token %}
-            <div class="form-field">
-                {{ form.title.label_tag }}
-                {{ form.title }}
-            </div>
-            <div class="form-field">
-                {{ form.description.label_tag }}
-                {{ form.description }}
-            </div>
-            <div class="form-field">
-                {{ form.date.label_tag }}
-                {{ form.date }}
-            </div>
-            <div class="form-field">
-                {{ form.time.label_tag }}
-                {{ form.time }}
-            </div>
             <div class="button-container">
-                <button type="submit" class="submit-button">Add Event</button>
+                <button type="submit" class="submit-button">Yes, Delete</button>
                 <a href="{% url 'home' %}" class="cancel-button">Cancel</a>
             </div>
         </form>

@@ -260,6 +260,18 @@ def updatePost(request, pk):
     return render(request, "base/updatepost.html", {"form": form})
 
 @login_required
+def delete_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    # Ensure the logged-in user is the owner of the post
+    if post.host != request.user:
+        raise Http404("You do not have permission to delete this post.")
+    if request.method == "POST":
+        post.delete()
+        return redirect('home')  # Redirect to the home page after deletion
+
+    return render(request, 'base/delete_post.html', {'post': post})
+
+@login_required
 def update_profile(request, pk):
     try:
         user = User.objects.get(pk=pk)
