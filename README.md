@@ -111,12 +111,4 @@ python manage.py runserver
 ### Home Page  
 ![Home Page](References/homepage.png "Home Page")  
 
----
 
-## 🔮 Future Improvements  
-
-- 📲 **Mobile App Version:** Progressive Web App (PWA).  
-- 📈 **Fitness Analytics:** Progress tracking.
-- 📅 **Event RSVP System:** Notifications and attendance tracking.  
-
-# unit
