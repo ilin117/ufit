@@ -1,12 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update Post</title>
+    <title>Add Event</title>
     <style>
-        @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
-
         body {
             font-family: "Inter", sans-serif;
             background-color: #f4f4f4;
@@ -19,18 +15,17 @@
         }
 
         .form-container {
-            max-width: 600px;
-            width: 100%;
-            padding: 20px;
             background-color: white;
+            padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             text-align: center;
+            width: 400px;
         }
 
-        .form-container h2 {
+        .form-container h1 {
             font-size: 24px;
-            font-weight: 600;
+            font-weight: bold;
             color: #2bca92;
             margin-bottom: 20px;
         }
@@ -56,19 +51,14 @@
             font-size: 16px;
         }
 
-        .form-field textarea {
-            resize: vertical;
-            height: 100px;
-        }
-
         .button-container {
-            margin-top: 20px;
-            text-align: right;
+            display: flex;
+            justify-content: space-between;
         }
 
         .submit-button {
             padding: 10px 20px;
-            background-color: rgba(32, 201, 151, 1);
+            background-color: #2bca92;
             color: white;
             border: none;
             border-radius: 5px;
@@ -78,20 +68,50 @@
         }
 
         .submit-button:hover {
-            background-color: rgba(24, 155, 116, 1);
+            background-color: #218838;
+        }
+
+        .cancel-button {
+            padding: 10px 20px;
+            background-color: #e0e0e0;
+            color: #333;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .cancel-button:hover {
+            background-color: #c0c0c0;
         }
     </style>
 </head>
 <body>
     <div class="form-container">
-        <h2>Update Post</h2>
+        <h1>Add Event</h1>
         <form method="POST">
             {% csrf_token %}
             <div class="form-field">
-                {{ form.as_p }}
+                {{ form.title.label_tag }}
+                {{ form.title }}
+            </div>
+            <div class="form-field">
+                {{ form.description.label_tag }}
+                {{ form.description }}
+            </div>
+            <div class="form-field">
+                {{ form.date.label_tag }}
+                {{ form.date }}
+            </div>
+            <div class="form-field">
+                {{ form.time.label_tag }}
+                {{ form.time }}
             </div>
             <div class="button-container">
-                <button type="submit" class="submit-button">Update</button>
+                <button type="submit" class="submit-button">Add Event</button>
+                <a href="{% url 'home' %}" class="cancel-button">Cancel</a>
             </div>
         </form>
     </div>

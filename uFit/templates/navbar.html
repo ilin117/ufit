@@ -45,11 +45,14 @@
                 <div class="profile-options">
                     <div class="user-info">
                         <img
-                            src="{{ user.profile.profile_image.url|default:'https://via.placeholder.com/60' }}">
+                            src="{{ user.profile.profile_image.url|default:'https://via.placeholder.com/60' }}" alt="{{ user.username }}'s Profile Picture" style="width: 60px; height: 60px;">
                         <h3>{{ user.username }}</h3>
                     </div>
                     <a href="{% url 'profilepage' user.id %}" class="options-links">Edit Profile</a>
-                    <a href="{% url 'logout' %}" class="options-links">Logout</a>
+                    <form action="{% url 'logout' %}" method="POST" >
+                        {% csrf_token %}
+                        <button type="submit" style="font-size: medium; padding-left:41px;">Log out</button>
+                    </form>
                 </div>
             </div>
         {% else %}

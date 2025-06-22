@@ -13,6 +13,7 @@
     display: flex;
     top: 0;
     border-bottom: 1px solid rgba(180, 171, 171, 0.66);
+    z-index: 10000;
 }
 
 #uFit-logo {
@@ -561,6 +562,13 @@ body > div.uFit-nav > div.chatpage-btn i {
     display: inline-block;
     vertical-align: middle;
     margin: 10px 10px;
+    text-align: center;
+    margin-left: auto;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 10px 10px;
+    z-index: 1;
 }
 .searchBar input {
     width: 300px;
@@ -571,8 +579,42 @@ body > div.uFit-nav > div.chatpage-btn i {
 
 a.post-icon {
     position: absolute;
-    top: 30%;
-    right: 5%;
     width: 15px;
     height: 15px;
+    z-index: 1;
+}
+
+svg.post-icon {
+    position: absolute;
+    top: 100%;
+}
+
+.user-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+/* Custom scrollbar styles */
+body {
+    overflow-y: auto;
+}
+
+body::-webkit-scrollbar {
+    width: 15px;
+    height: 10px;
+    border: solid 1px rgb(255, 255, 255);
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: rgba(32, 201, 151, 1);
+    border-radius: 10px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background-color: #27ae60;
+}
+
+body::-webkit-scrollbar-track {
+    background-color: #4b4b4b;
+    border-radius: 10px;
 }

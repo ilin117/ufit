@@ -110,7 +110,7 @@
                 <img src="{{ user.profile.profile_image.url|default:'https://via.placeholder.com/150' }}" alt="User Profile" class="profile-image" id="profileImage">
             </label>
             <h2>{{ user.username }}</h2>
-        
+            <p>{{ user.profile.role }}</p>
             <div class="action-buttons">
                 <a href="{% url 'update-profile' user.id %}" class="edit-button">Edit Profile</a>
                 <a href="{% url 'postpage' %}" class="createpost-button">Create Post</a>
@@ -123,17 +123,7 @@
     </div>
 
     <div class="posts-container">
-        {% for post in posts %}
-        <div class="post">
-            <div class="post-header">@{{ post.host.username }}</div>
-            <div class="post-content">
-                <p>{{ post.body }}</p>
-                {% if post.image %}
-                <img src="{{ post.image.url }}" alt="Post Image">
-                {% endif %}
-            </div>
-        </div>
-        {% endfor %}
+        {% include 'base/feed.html' %}   
     </div>
 
     <script>

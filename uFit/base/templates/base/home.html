@@ -25,7 +25,7 @@
                 </div>
                 <!-- Post Icon -->
                 <a href="{% url 'postpage' %}" class="post-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-plus-circle, post-icon" viewBox="0 0 20 20">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-plus-circle, post-icon post-icon" viewBox="0 0 20 20">
                         <path d="M8 1a7 7 0 1 1 0 14A7 7 0 0 1 8 1zM8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0z" />
                         <path d="M8 4a.5.5 0 0 1 .5.5V7h2.5a.5.5 0 0 1 0 1H8.5v2.5a.5.5 0 0 1-1 0V8H5a.5.5 0 0 1 0-1h2.5V4.5A.5.5 0 0 1 8 4z" />
                     </svg>
@@ -40,15 +40,18 @@
         <!-- Events Section -->
         <div class="events">
             <h2>Events</h2>
-            <div class="day"><h3>Monday</h3><p>No events today.</p></div>
-            <div class="day"><h3>Tuesday</h3><p>Yoga class at 6:00 PM.</p></div>
-            <div class="day"><h3>Wednesday</h3><p>Group run at 7:00 AM.</p><p>Outdoor Cycling Ride at 12:00 PM.</p></div>
-            <div class="day"><h3>Thursday</h3><p>Nutrition workshop at 12:00 PM.</p></div>
-            <div class="day"><h3>Friday</h3><p>Lift workout at 2:00 PM.</p><p>Pilates class at 6:30 PM.</p></div>
-            <div class="day"><h3>Saturday</h3><p>Weekend hike at 8:00 AM.</p></div>
-            <div class="day"><h3>Sunday</h3><p>Rest day - No events.</p></div>
+            <a href="{% url 'add-event' %}">Add Event</a>
+            {% for event in events %}
+            <div class="day">
+                <h3>{{ event.date|date:"l, F j, Y" }}</h3>
+                <p><strong>{{ event.title }}</strong> at {{ event.time|time:"P" }}</p>
+                <p>{{ event.description }}</p>
+                <p>Posted by: <a href="{% url 'profilepage' event.created_by.id %}">{{ event.created_by.username }}</a></p>
+            </div>
+            {% empty %}
+            <p>No upcoming events.</p>
+            {% endfor %}
         </div>
-    </div>
 
     {% include 'footer.html' %}
 

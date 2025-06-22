@@ -1,8 +1,7 @@
 from typing import AsyncGenerator
-
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Post, Profile
-from .forms import PostForm, ProfileForm
+from .models import Post, Profile, Event
+from .forms import PostForm, ProfileForm, EventForm
 from django.http import Http404, HttpRequest, StreamingHttpResponse, HttpResponse, JsonResponse, HttpResponseRedirect
 from . import models
 import asyncio
@@ -19,6 +18,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.models import User
+from django.core.paginator import Paginator
+from django.utils.timezone import now
 """ from .models import Post
  """
 # Create your views here.
@@ -132,22 +133,30 @@ def welcomePage(request: HttpRequest):
 def privacyPage(request):
     return render(request, "base/privacy.html")
 
-
 @login_required
 def homePage(request):
     query = request.GET.get("q", "")
-    
-    if query:
-        # Ensure the correct model fields are used
-        posts = Post.objects.filter(
-            Q(title__icontains=query) | 
-            Q(body__icontains=query) | 
-            Q(host__username__icontains=query)
-        )
-    else:
-        posts = Post.objects.all()
 
-    context = {"posts": posts}
+    # Filter posts based on the search query
+    posts = Post.objects.filter(
+        Q(title__icontains=query) | 
+        Q(body__icontains=query) | 
+        Q(host__username__icontains=query)
+    ) if query else Post.objects.all()
+
+    # Get upcoming events
+    events = Event.objects.filter(date__gte=now().date()).order_by('date', 'time')
+
+    # Paginate posts and events
+    post_paginator = Paginator(posts, 10)
+    post_page_number = request.GET.get('page')
+    posts = post_paginator.get_page(post_page_number)
+
+    event_paginator = Paginator(events, 5)
+    event_page_number = request.GET.get('event_page')
+    events = event_paginator.get_page(event_page_number)
+
+    context = {"posts": posts, "events": events}
     return render(request, "base/home.html", context)
 
 # uFit/base/views.py
@@ -251,31 +260,51 @@ def updatePost(request, pk):
     return render(request, "base/updatepost.html", {"form": form})
 
 @login_required
+def delete_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    # Ensure the logged-in user is the owner of the post
+    if post.host != request.user:
+        raise Http404("You do not have permission to delete this post.")
+    if request.method == "POST":
+        post.delete()
+        return redirect('home')  # Redirect to the home page after deletion
+
+    return render(request, 'base/delete_post.html', {'post': post})
+
+@login_required
 def update_profile(request, pk):
-    # Ensure the user exists
     try:
         user = User.objects.get(pk=pk)
     except User.DoesNotExist:
         raise Http404("User does not exist")
 
-    # Ensure the user is the same as the current user or is an admin
     if user != request.user and not request.user.is_staff:
         raise Http404("You do not have permission to update this user's profile")
 
-    # Ensure the profile exists
-    try:
-        profile, created = Profile.objects.get_or_create(user=user)
-    except User.DoesNotExist:
-        raise Http404("User does not have a profile")
+    profile, created = Profile.objects.get_or_create(user=user)
 
     if request.method == "POST":
         form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
             return redirect("profilepage", pk=request.user.pk)
-
     else:
         form = ProfileForm(instance=profile)
 
     return render(request, "base/update-profile.html", {"form": form})
    
+
+@login_required
+def add_event(request):
+    if request.method == 'POST':
+        form = EventForm(request.POST)
+        if form.is_valid():
+            event = form.save(commit=False)
+            event.created_by = request.user
+            event.save()
+            return redirect('home')
+    else:
+        form = EventForm()
+
+    return render(request, 'base/add_event.html', {'form': form})
+
