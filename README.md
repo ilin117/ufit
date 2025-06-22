@@ -29,10 +29,8 @@ Welcome to **UFIT**, a web-based platform designed to help college students main
 ## ⚙️ Tech Stack  
 
 - **Backend:** Django 5.1.3, Python 3.12.8  
-- **Frontend:** HTML5, CSS3, JavaScript (AJAX)  
-- **Database:** SQLite (Development), PostgreSQL (Production)  
-- **Version Control:** Git & GitHub  
-
+- **Frontend:** HTML5, CSS3, JavaScript
+- **Database:** SQLite
 ---
 
 ## 🚀 Installation  
