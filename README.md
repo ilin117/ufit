@@ -4,19 +4,6 @@ Welcome to **UFIT**, a web-based platform designed to help college students main
 
 ---
 
-## 📋 Table of Contents  
-- [Project Overview](#project-overview)  
-- [Features](#features)  
-- [Tech Stack](#tech-stack)  
-- [Installation](#installation)  
-- [Project Structure](#project-structure)  
-- [Key Functionalities](#key-functionalities)  
-- [Screenshots](#screenshots)  
-- [Future Improvements](#future-improvements)  
-- [License](#license)  
-
----
-
 ## 🧭 Project Overview  
 
 **UFIT** connects college students with personal trainers, wellness organizations, and peer workout groups at their campus. The platform supports connecting with fitness communities through posts, events, and global messaging.  
